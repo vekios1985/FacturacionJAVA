@@ -12,6 +12,7 @@ public class ItemFactura {
 	
 	
 	public ItemFactura() {
+		this.id=0L;
 	}
 	public ItemFactura(Factura factura, Producto producto, Double cantidad, Double precio) {
 		super();

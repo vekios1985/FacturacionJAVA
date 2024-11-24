@@ -9,13 +9,38 @@ public class Cliente {
 	private String direccion;
 	private String localidad;
 	private String email;
+	private Integer dni;
 	private Iva iva;
 	
 	
 	
 	public Cliente() {
-		
+		this.id=0L;
 	}
+	
+	
+	
+	public Cliente(String nombre, String apelido, String telefono, String direccion, String localidad, String email,Integer dni,
+			Iva iva) {
+		super();
+		this.nombre = nombre;
+		this.apelido = apelido;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.email = email;
+		this.dni=dni;
+		this.iva = iva;
+	}
+
+	public Integer getDni() {
+		return dni;
+	}
+
+	public void setDni(Integer dni) {
+		this.dni = dni;
+	}
+
 	public Long getId() {
 		return id;
 	}

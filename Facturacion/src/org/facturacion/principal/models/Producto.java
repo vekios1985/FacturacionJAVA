@@ -13,7 +13,7 @@ public class Producto {
 		this.categoria = categoria;
 	}
 	public Producto() {
-		
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

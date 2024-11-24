@@ -8,7 +8,7 @@ public class Iva {
 	
 	
 	public Iva() {
-		
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

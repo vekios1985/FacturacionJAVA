@@ -8,7 +8,7 @@ public class TipoFactura {
 	
 	
 	public TipoFactura() {
-		
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

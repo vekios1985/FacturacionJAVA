@@ -8,6 +8,7 @@ public class Caja {
 	
 	
 	public Caja() {
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

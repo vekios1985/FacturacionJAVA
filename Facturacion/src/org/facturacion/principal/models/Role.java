@@ -8,7 +8,7 @@ public class Role {
 	
 	
 	public Role() {
-		
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

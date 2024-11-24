@@ -12,7 +12,7 @@ public class Proveedor {
 	
 	
 	public Proveedor() {
-		
+		this.id=0L;
 	}
 	public Proveedor(String nombre, String telefono, String email, String direccion) {
 		super();

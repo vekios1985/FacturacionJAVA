@@ -14,6 +14,7 @@ public class Usuario {
 	
 	
 	public Usuario() {
+		this.id=0L;
 	}
 	public Usuario(Role role, String username, String password, String nombre, String apellido, Integer dni) {
 		super();

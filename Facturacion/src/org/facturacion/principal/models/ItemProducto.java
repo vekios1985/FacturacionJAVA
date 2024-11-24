@@ -12,10 +12,10 @@ public class ItemProducto {
 	
 	
 	public ItemProducto() {
-		
+		this.id=0L;
 	}
 	public ItemProducto(Producto producto, Proveedor proveedor, Double stock, Double precio) {
-		super();
+		
 		this.producto = producto;
 		this.proveedor = proveedor;
 		this.stock = stock;

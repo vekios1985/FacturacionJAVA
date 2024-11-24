@@ -16,6 +16,7 @@ public class Factura {
 	
 	public Factura() {
 		this.descuento=0D;
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

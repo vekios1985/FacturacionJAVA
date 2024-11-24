@@ -16,6 +16,7 @@ public class Venta {
 	
 	public Venta() {
 		this.items=new ArrayList<ItemFactura>();
+		id=0L;
 	}
 	
 	public void addItem(ItemFactura item)
@@ -61,6 +62,7 @@ public class Venta {
 		{
 			total+=i.getMonto();
 		}
+		total=total-total*this.factura.getDescuent0()/100;
 		return total;
 	}
 
