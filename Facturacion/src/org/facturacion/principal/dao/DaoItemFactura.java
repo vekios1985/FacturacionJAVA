@@ -10,7 +10,6 @@ import java.util.List;
 import org.facturacion.principal.models.Factura;
 import org.facturacion.principal.models.ItemFactura;
 import org.facturacion.principal.models.Producto;
-import org.facturacion.principal.models.TipoFactura;
 import org.facturacion.principal.utils.Conexion;
 
 public class DaoItemFactura implements IDao<ItemFactura>{

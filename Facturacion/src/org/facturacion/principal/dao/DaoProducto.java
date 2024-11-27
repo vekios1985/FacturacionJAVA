@@ -32,7 +32,7 @@ public class DaoProducto implements IDao<Producto>{
 		Categoria cat=new Categoria();
 		cat.setId(st.getLong("c.id_categoria"));
 		cat.setNombre(st.getString("c.nombre"));
-		Producto p=new Producto(st.getString("p.nombre"), cat);
+		Producto p=new Producto(st.getString("p.nombre"), cat,st.getLong("codigo"));
 		p.setId(st.getLong("p.id_producto"));
 		return p;
 	}
@@ -44,6 +44,23 @@ public class DaoProducto implements IDao<Producto>{
 				PreparedStatement ps=cnn.prepareStatement("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categoria where p.id_poducto=?"))
 		{
 			ps.setLong(1, id);
+			ResultSet st=ps.executeQuery();
+			if(st.next())
+			{
+				p=getProducto(st);
+			}
+		}
+		
+		return p;
+	}
+	
+	
+	public Producto findByCodigo(Long codigo) throws SQLException, Exception{
+		Producto p=null;
+		try(Connection cnn=Conexion.getConnection();
+				PreparedStatement ps=cnn.prepareStatement("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categoria where p.codigo=?"))
+		{
+			ps.setLong(1, codigo);
 			ResultSet st=ps.executeQuery();
 			if(st.next())
 			{

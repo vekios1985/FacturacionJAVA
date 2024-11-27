@@ -49,10 +49,11 @@ public class DaoFactura implements IDao<Factura>{
 			tipo.setTipo(st.getString("t.tipo_factura"));
 			factura.setTipoFactura(tipo);
 			factura.setNumero(st.getString("f.numero"));
-			factura.setDescuent0(st.getDouble("f.descuento"));
+			factura.setDescuento(null);
 			factura.setFecha(st.getDate("f.fecha").toLocalDate());
 			factura.setCliente(cliente);
 			factura.setId(st.getLong("f.id_factura"));
+			factura.setObservacion(st.getString("observacion"));
 			
 		}
 		return factura;
@@ -97,12 +98,12 @@ public class DaoFactura implements IDao<Factura>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into facturas numero,fecha,id_cliente,descuento,id_tipo_factura values(?,?,?,?,?)";
+			sql="insert into facturas (numero,fecha,id_cliente,descuento,id_tipo_factura,observacion) values(?,?,?,?,?,?)";
 		}
 		else
 		{
 			
-				sql="update facturas set numero=?,fecha=?,id_cliente=?,descuento=?,id_tipo_factura=? where id_factura=?";
+				sql="update facturas set numero=?,fecha=?,id_cliente=?,descuento=?,id_tipo_factura=?,observacion=? where id_factura=?";
 		}
 		try(Connection cnn=Conexion.getConnection();
 				PreparedStatement ps=cnn.prepareStatement(sql))
@@ -110,10 +111,11 @@ public class DaoFactura implements IDao<Factura>{
 						ps.setString(1, object.getNumero());
 						ps.setDate(2, Date.valueOf(object.getFecha()));
 						ps.setLong(3, object.getCliente().getId());
-						ps.setDouble(4, object.getDescuent0());
+						ps.setDouble(4, object.getDescuento());
 						ps.setLong(5, object.getTipoFactura().getId());
+						ps.setString(6, object.getObservacion());
 						if(object.getId()!=0)
-							ps.setLong(6, object.getId());
+							ps.setLong(7, object.getId());
 						ps.executeUpdate();
 						
 					}

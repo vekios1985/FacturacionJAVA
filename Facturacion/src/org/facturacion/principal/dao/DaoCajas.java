@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.facturacion.principal.models.Caja;
-import org.facturacion.principal.models.Role;
 import org.facturacion.principal.utils.Conexion;
 
 public class DaoCajas implements IDao<Caja>{

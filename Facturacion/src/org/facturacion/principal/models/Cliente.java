@@ -4,7 +4,7 @@ public class Cliente {
 	
 	private Long id;
 	private String nombre;
-	private String apelido;
+	private String apellido;
 	private String telefono;
 	private String direccion;
 	private String localidad;
@@ -20,17 +20,18 @@ public class Cliente {
 	
 	
 	
-	public Cliente(String nombre, String apelido, String telefono, String direccion, String localidad, String email,Integer dni,
+	public Cliente(String nombre, String apellido, String telefono, String direccion, String localidad, String email,Integer dni,
 			Iva iva) {
 		super();
 		this.nombre = nombre;
-		this.apelido = apelido;
+		this.apellido = apellido;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.email = email;
 		this.dni=dni;
 		this.iva = iva;
+		this.id=0L;
 	}
 
 	public Integer getDni() {
@@ -53,11 +54,11 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApelido() {
-		return apelido;
+	public String getApellido() {
+		return apellido;
 	}
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
+	public void setApellido(String apelido) {
+		this.apellido = apelido;
 	}
 	public String getTelefono() {
 		return telefono;

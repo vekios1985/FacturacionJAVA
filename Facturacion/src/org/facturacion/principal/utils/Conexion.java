@@ -17,12 +17,13 @@ public class Conexion {
 	
 	public static Connection getConnection()throws Exception
 	{
-		if(cnn==null)
+		if(cnn==null||cnn.isClosed())
 		{
 			
 				Properties config = new Properties();
 				InputStream configInput = null;
-				configInput = new FileInputStream("cnf.properties");
+				//configInput = new FileInputStream("cnf.properties");
+				configInput=Conexion.class.getClassLoader().getResourceAsStream("configuracion/cnf.properties");
 			    config.load(configInput);	
 				cnn=DriverManager.getConnection(config.getProperty("url"), config.getProperty("user"),config.getProperty("pass"));
 				cantidad++;

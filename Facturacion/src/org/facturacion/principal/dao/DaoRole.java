@@ -9,7 +9,6 @@ import java.util.List;
 
 
 
-import org.facturacion.principal.models.ItemFactura;
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.utils.Conexion;
 

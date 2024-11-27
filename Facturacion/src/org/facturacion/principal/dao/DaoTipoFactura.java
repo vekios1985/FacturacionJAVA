@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.facturacion.principal.models.Categoria;
-import org.facturacion.principal.models.Iva;
 import org.facturacion.principal.models.TipoFactura;
 import org.facturacion.principal.utils.Conexion;
 

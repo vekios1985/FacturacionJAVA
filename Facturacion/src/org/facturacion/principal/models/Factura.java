@@ -10,10 +10,23 @@ public class Factura {
 	private Cliente cliente;
 	private Double descuento;
 	private TipoFactura tipoFactura;
+	private String observacion;
 	
 	
 	
 	
+	public Double getDescuento() {
+		return descuento;
+	}
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
+	}
+	public String getObservacion() {
+		return observacion;
+	}
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
 	public Factura() {
 		this.descuento=0D;
 		this.id=0L;
@@ -42,12 +55,7 @@ public class Factura {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Double getDescuent0() {
-		return descuento;
-	}
-	public void setDescuent0(Double descuent0) {
-		this.descuento = descuent0;
-	}
+	
 	public TipoFactura getTipoFactura() {
 		return tipoFactura;
 	}

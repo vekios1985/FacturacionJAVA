@@ -62,7 +62,7 @@ public class Venta {
 		{
 			total+=i.getMonto();
 		}
-		total=total-total*this.factura.getDescuent0()/100;
+		total=total-total*this.factura.getDescuento()/100;
 		return total;
 	}
 

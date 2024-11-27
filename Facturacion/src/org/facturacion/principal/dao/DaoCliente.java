@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.facturacion.principal.models.Cliente;
-import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.Iva;
-import org.facturacion.principal.models.Proveedor;
 import org.facturacion.principal.utils.Conexion;
 
 public class DaoCliente implements IDao<Cliente>{
@@ -36,7 +34,8 @@ public class DaoCliente implements IDao<Cliente>{
 		iva.setId(st.getLong("i.id_iva"));
 		iva.setNombre(st.getString("i.tipo_iva"));
 		cliente=new Cliente(st.getString("c.nombre"),st.getString("c.apellido"),st.getString("c.telefono"),
-				st.getString("c.direccion"),st.getString("c.localidad"),st.getString("c.nombre"),st.getInt("c.dni"),iva);
+				st.getString("c.direccion"),st.getString("c.localidad"),st.getString("c.email"),st.getInt("c.dni"),iva);
+		cliente.setId(st.getLong("c.id_cliente"));
 		return cliente;
 	}
 
@@ -77,20 +76,22 @@ public class DaoCliente implements IDao<Cliente>{
 	@Override
 	public void save(Cliente object) throws SQLException, Exception {
 		String sql;
+		
 		if(object.getId()==0)
 		{
-			sql="insert into clientes nombre,apellido,telefono,direccion,localidad,email,dni,id_iva values(?,?,?,?,?,?,?,?)";
+			sql="insert into clientes (nombre,apellido,telefono,direccion,localidad,email,dni,id_iva) values(?,?,?,?,?,?,?,?)";
 		}
 		else
 		{
 			
-				sql="update proveedores set nombre=?,apellido=?,telefono=?,direccion=?,localidad=?,email=?,dni=?,id_iva=? where id_cliente=?";
+				sql="update clientes set nombre=?,apellido=?,telefono=?,direccion=?,localidad=?,email=?,dni=?,id_iva=? where id_cliente=?";
 		}
+		
 		try(Connection cnn=Conexion.getConnection();
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());
-						ps.setString(2, object.getApelido());
+						ps.setString(2, object.getApellido());
 						ps.setString(3, object.getTelefono());
 						ps.setString(4, object.getDireccion());
 						ps.setString(5, object.getLocalidad());

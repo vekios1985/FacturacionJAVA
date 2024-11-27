@@ -5,12 +5,14 @@ public class Producto {
 	private Long id;
 	private String nombre;
 	private Categoria categoria;
+	private Long codigo;
 	
 	
 	
-	public Producto(String nombre, Categoria categoria) {
+	public Producto(String nombre, Categoria categoria,Long codigo) {
 		this.nombre = nombre;
 		this.categoria = categoria;
+		this.codigo=codigo;
 	}
 	public Producto() {
 		this.id=0L;
@@ -38,6 +40,12 @@ public class Producto {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.nombre;
+	}
+	public Long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 }

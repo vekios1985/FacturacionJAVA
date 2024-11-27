@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.facturacion.principal.models.Caja;
 import org.facturacion.principal.models.Factura;
-import org.facturacion.principal.models.ItemFactura;
 import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.models.Venta;
 import org.facturacion.principal.utils.Conexion;

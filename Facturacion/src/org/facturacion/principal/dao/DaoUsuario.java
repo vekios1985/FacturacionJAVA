@@ -1,14 +1,12 @@
 package org.facturacion.principal.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.facturacion.principal.models.Factura;
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.utils.Conexion;

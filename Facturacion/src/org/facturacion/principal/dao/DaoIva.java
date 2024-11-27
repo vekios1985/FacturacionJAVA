@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.Iva;
 import org.facturacion.principal.utils.Conexion;
 
@@ -74,13 +73,14 @@ public class DaoIva implements IDao<Iva>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into iva tipo_iva values(?)";
+			sql="insert into iva (tipo_iva) values(?)";
 		}
 		else
 		{
 			
 				sql="update iva set tipo_iva=? where id_iva=?";
 		}
+		System.out.println("g");
 		try(Connection cnn=Conexion.getConnection();
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
