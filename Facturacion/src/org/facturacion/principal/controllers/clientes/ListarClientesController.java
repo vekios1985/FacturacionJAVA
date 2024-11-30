@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import org.facturacion.principal.models.Cliente;
-import org.facturacion.principal.services.ClienteService;
-import org.facturacion.principal.services.IClientesService;
+import org.facturacion.principal.services.clientes.ClienteService;
+import org.facturacion.principal.services.clientes.IClientesService;
 import org.facturacion.principal.utils.GenerarExcel;
 import org.facturacion.principal.utils.GenerarPdf;
 import org.facturacion.principal.vista.FormPrincipal;
@@ -101,16 +101,8 @@ public class ListarClientesController {
 			if (e.getSource() == frmListado.btnExcel) {
 				if (frmListado.tableModel.getRowCount() > 0) {
 					
-					Object[][] datos = new Object[frmListado.tableModel.getRowCount()][frmListado.tableModel
-							.getColumnCount()];
-					for (int i = 0; i < frmListado.tableModel.getRowCount(); i++) {
 					
-						for (int j = 0; j < frmListado.tableModel.getColumnCount(); j++) {
-							
-							datos[i][j] = frmListado.tableModel.getValueAt(i, j);
-						}
-					}
-					GenerarExcel.CrearDocumento(columnas, datos);
+					GenerarExcel.CrearDocumento(frmListado.tableModel);
 				}
 
 			}

@@ -1,8 +1,9 @@
-package org.facturacion.principal.services;
+package org.facturacion.principal.services.clientes;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Optional;
 
 import org.facturacion.principal.dao.DaoCliente;
 import org.facturacion.principal.dao.DaoIva;
@@ -77,15 +78,13 @@ public class ClienteService implements IClientesService{
 
 	@Override
 	public Cliente findByDni(Integer dni) throws Exception {
-		List<Cliente>lista=findAll();
-		for(Cliente c:lista)
-		{
-			if(c.getDni().equals(dni))
-			{
-				return c;
-			}
-		}
-		return null;
+		
+		Optional<Cliente>cliente=findAll().stream().filter(p->p.getDni().equals(dni)).findFirst();
+		
+		if(cliente.isPresent())
+			return cliente.get();
+		else
+			return null;
 	}
 
 }

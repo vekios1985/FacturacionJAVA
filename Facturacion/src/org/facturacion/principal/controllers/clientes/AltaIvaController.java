@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import org.facturacion.principal.models.Iva;
-import org.facturacion.principal.services.ClienteService;
+import org.facturacion.principal.services.clientes.ClienteService;
 import org.facturacion.principal.utils.Texto;
 import org.facturacion.principal.vista.FormPrincipal;
 import org.facturacion.principal.vista.administracion.FormAltaIva;

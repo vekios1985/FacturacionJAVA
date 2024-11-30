@@ -28,7 +28,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 	}
 
 	private Proveedor getProveedor(ResultSet st)throws SQLException, Exception {
-		Proveedor p=new Proveedor(st.getString("nombre"),st.getString("telefono"),st.getString("email"),st.getString("direccion"));
+		Proveedor p=new Proveedor(st.getString("nombre"),st.getString("telefono"),st.getString("email"),st.getString("direccion"),st.getLong("cuit"));
 		p.setId(st.getLong("id_proveedor"));
 		return p;
 	}
@@ -72,12 +72,12 @@ public class DaoProveedor implements IDao<Proveedor>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into proveedores nombre,telefono,email,direccion values(?,?,?,?)";
+			sql="insert into proveedores (nombre,telefono,email,direccion,cuit) values(?,?,?,?,?)";
 		}
 		else
 		{
 			
-				sql="update proveedores set nombre=?,telefono=?,email=?,telefono=? where id_proveedor=?";
+				sql="update proveedores set nombre=?,telefono=?,email=?,direccion=?,cuit=? where id_proveedor=?";
 		}
 		try(Connection cnn=Conexion.getConnection();
 				PreparedStatement ps=cnn.prepareStatement(sql))
@@ -86,8 +86,9 @@ public class DaoProveedor implements IDao<Proveedor>{
 						ps.setString(2, object.getTelefono());
 						ps.setString(3, object.getEmail());
 						ps.setString(4, object.getDireccion());
+						ps.setLong(5, object.getCuit());
 						if(object.getId()!=0)
-							ps.setLong(5, object.getId());
+							ps.setLong(6, object.getId());
 						ps.executeUpdate();
 						
 					}

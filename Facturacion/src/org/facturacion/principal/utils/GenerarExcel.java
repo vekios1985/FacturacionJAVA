@@ -7,14 +7,15 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class GenerarExcel {
 	
-	public static void CrearDocumento(String []columnas,Object[][]datos) {
-	
+
+	public static void CrearDocumento(DefaultTableModel modelo) {
 	 Workbook workbook = new XSSFWorkbook();
 
  
@@ -24,23 +25,22 @@ public class GenerarExcel {
      Row headerRow = sheet.createRow(0);
      
 
-     
-     int i=0;
-     for(String s:columnas)
+     for(int i=0;i<modelo.getColumnCount();i++)
      {
-    	 headerRow.createCell(i).setCellValue(s);
-    	 i++;
+    	 headerRow.createCell(i).setCellValue(modelo.getColumnName(i));
+     }
+     
+     
+     for(int rowcount=0;rowcount<modelo.getRowCount();rowcount++)
+     {
+    	 Row row = sheet.createRow(rowcount+1);
+    	 for(int l=0;l<modelo.getColumnCount();l++)
+        	 row.createCell(l).setCellValue(modelo.getValueAt(rowcount,l).toString());
      }
 
+   
 
-     int rowNum = 1;
-     for (Object[] dato : datos) {
-         Row row = sheet.createRow(rowNum++);
-         for(int l=0;l<columnas.length;l++)
-         row.createCell(l).setCellValue(dato[l].toString());
-     }
-
-     for (int j = 0; j < columnas.length; j++) {
+     for (int j = 0; j < modelo.getColumnCount(); j++) {
          sheet.autoSizeColumn(j);
      }
 

@@ -1,4 +1,4 @@
-package org.facturacion.principal.services;
+package org.facturacion.principal.services.clientes;
 
 import java.util.List;
 

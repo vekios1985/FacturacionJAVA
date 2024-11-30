@@ -28,6 +28,9 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmAltaIva;
 	public JMenuItem mntmEditarCliente;
 	public JMenuItem mntmListarClientes;
+	public JMenuItem mntmNuevoProveedor;
+	public JMenuItem mntmEditarProveedor;
+	public JMenuItem mntmListarProveedor;
 	/**
 	 * Launch the application.
 	 */
@@ -96,6 +99,15 @@ public class FormPrincipal extends JFrame {
 		
 		mnNewMenuProveedores = new JMenu("Proveedores");
 		menuBar.add(mnNewMenuProveedores);
+		
+		mntmNuevoProveedor = new JMenuItem("Nuevo Proveedor");
+		mnNewMenuProveedores.add(mntmNuevoProveedor);
+		
+		mntmEditarProveedor = new JMenuItem("Editar Proveedor");
+		mnNewMenuProveedores.add(mntmEditarProveedor);
+		
+		mntmListarProveedor = new JMenuItem("Listar Proveedores");
+		mnNewMenuProveedores.add(mntmListarProveedor);
 		
 		mnNewMenuProductos = new JMenu("Productos");
 		menuBar.add(mnNewMenuProductos);

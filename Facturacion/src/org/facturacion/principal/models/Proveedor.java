@@ -7,19 +7,27 @@ public class Proveedor {
 	private String telefono;
 	private String email;
 	private String direccion;
+	private Long cuit;
 	
 	
 	
 	
+	public Long getCuit() {
+		return cuit;
+	}
+	public void setCuit(Long cuit) {
+		this.cuit = cuit;
+	}
 	public Proveedor() {
 		this.id=0L;
 	}
-	public Proveedor(String nombre, String telefono, String email, String direccion) {
-		super();
+	public Proveedor(String nombre, String telefono, String email, String direccion,Long cuit) {
+		this.id=0L;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
 		this.direccion = direccion;
+		this.cuit=cuit;
 	}
 	public Long getId() {
 		return id;

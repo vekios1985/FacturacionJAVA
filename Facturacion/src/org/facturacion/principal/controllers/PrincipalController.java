@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import org.facturacion.principal.controllers.clientes.AltaClienteController;
 import org.facturacion.principal.controllers.clientes.AltaIvaController;
 import org.facturacion.principal.controllers.clientes.ListarClientesController;
+import org.facturacion.principal.controllers.proveedores.AltaProveedoresController;
+import org.facturacion.principal.controllers.proveedores.ListarProveedoresController;
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.services.ILoginService;
@@ -20,9 +22,9 @@ public class PrincipalController {
 	public FormPrincipal formPrincipal;
 
 	private AltaClienteController altaClienteController;
-
+	private AltaProveedoresController altaProveedoresController;
 	private AltaIvaController altaIva;
-
+	private ListarProveedoresController listarProveedoresController;
 	private ListarClientesController listarClientesController;
 	private LoginController controllerLogin;
 	public Usuario usuario = null;
@@ -87,6 +89,9 @@ public class PrincipalController {
 		formPrincipal.mntmAltaIva.addActionListener(accionesMenu);
 		formPrincipal.mntmEditarCliente.addActionListener(accionesMenu);
 		formPrincipal.mntmListarClientes.addActionListener(accionesMenu);
+		formPrincipal.mntmEditarProveedor.addActionListener(accionesMenu);
+		formPrincipal.mntmListarProveedor.addActionListener(accionesMenu);
+		formPrincipal.mntmNuevoProveedor.addActionListener(accionesMenu);
 	}
 	
 	ActionListener accionesMenu=new ActionListener() {
@@ -130,6 +135,32 @@ public class PrincipalController {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
+			}
+			
+			if(e.getSource()==formPrincipal.mntmNuevoProveedor)
+			{
+				try
+				{
+					altaProveedoresController=new AltaProveedoresController(formPrincipal,false);
+				}catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
+				}
+			}
+			if(e.getSource()==formPrincipal.mntmEditarProveedor)
+			{
+				try
+				{
+					altaProveedoresController=new AltaProveedoresController(formPrincipal,true);
+				}catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
+				}
+			}
+			if(e.getSource()==formPrincipal.mntmListarProveedor)
+			{
+				listarProveedoresController=new ListarProveedoresController(formPrincipal);
+				
 			}
 			
 			

@@ -123,10 +123,10 @@ public class GenerarPdf {
 	        
 	    }
 	    
-	    private static List<String> splitTextToFitWidth(String text, float width, PDType1Font font, int fontSize) {
+	    /*private static List<String> splitTextToFitWidth(String text, float width, PDType1Font font, int fontSize) {
 	        List<String> lines = new ArrayList<>();
 	        StringBuilder line = new StringBuilder();
-	        for (String word : text.split(" ")) {
+	        for (String word : text.split("[ @]+")) {
 	            float lineWidth=0;
 				try {
 					lineWidth = font.getStringWidth(line + word + " ") / 1000 * fontSize;
@@ -145,5 +145,60 @@ public class GenerarPdf {
 	            lines.add(line.toString().trim());
 	        }
 	        return lines;
+	    }*/
+	    
+	    private static List<String> splitTextToFitWidth(String text, float width, PDType1Font font, int fontSize) {
+	        List<String> lines = new ArrayList<>();
+	        StringBuilder line = new StringBuilder();
+
+	        String[] words = text.split(" ");
+	        for (String word : words) {
+	            // Verificar si la palabra contiene '@'
+	            if (word.contains("@")) {
+	                String[] splitAt = word.split("@", 2);
+	                for (int i = 0; i < splitAt.length; i++) {
+	                    String part = splitAt[i];
+	                    // Agregar el separador '@' solo si no es el último fragmento
+	                    if (i > 0) {
+	                        part = "@" + part;
+	                    }
+
+	                    float lineWidth = 0;
+	                    try {
+	                        lineWidth = font.getStringWidth(line + part + " ") / 1000 * fontSize;
+	                    } catch (IOException e) {
+	                        e.printStackTrace();
+	                    }
+
+	                    if (lineWidth > width) {
+	                        lines.add(line.toString().trim());
+	                        line = new StringBuilder(part + " ");
+	                    } else {
+	                        line.append(part).append(" ");
+	                    }
+	                }
+	            } else {
+	                float lineWidth = 0;
+	                try {
+	                    lineWidth = font.getStringWidth(line + word + " ") / 1000 * fontSize;
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+
+	                if (lineWidth > width) {
+	                    lines.add(line.toString().trim());
+	                    line = new StringBuilder(word + " ");
+	                } else {
+	                    line.append(word).append(" ");
+	                }
+	            }
+	        }
+
+	        if (!line.isEmpty()) {
+	            lines.add(line.toString().trim());
+	        }
+
+	        return lines;
 	    }
+
 }

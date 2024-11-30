@@ -43,5 +43,25 @@ public class Texto {
 		}
 		return n_dni;
 	}
+	
+	public static Long validarCuit(String cuit) throws Exception
+	{
+		if(cuit.length()!=11)
+		{
+			throw new Exception("El cuit debe tener 11 digitos");
+		}
+		cuit=cuit.trim();
+		Long n_cuit;
+		try
+		{
+			n_cuit=Long.parseLong(cuit);
+		}
+		catch(NumberFormatException ex)
+		{
+			throw new Exception("Formato invalido de cuit");
+		}
+		return n_cuit;
+	}
+
 
 }
