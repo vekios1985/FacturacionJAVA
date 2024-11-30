@@ -54,7 +54,7 @@ public class LoginController {
 	public Usuario validarUsuario() {
 		
 		String username = "vekios";
-		char password[];
+		//char password[];
 		
 			try {
 				//username=login.textFieldUsuario.getText();

@@ -2,9 +2,6 @@ package org.facturacion.principal.services;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
-
-import javax.swing.JOptionPane;
 
 import org.facturacion.principal.dao.DaoRole;
 import org.facturacion.principal.dao.DaoUsuario;

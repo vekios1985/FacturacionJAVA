@@ -9,10 +9,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JToolBar;
-import javax.swing.LookAndFeel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 

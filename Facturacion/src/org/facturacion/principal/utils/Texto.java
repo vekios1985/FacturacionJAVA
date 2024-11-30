@@ -1,6 +1,6 @@
 package org.facturacion.principal.utils;
 
-
+import java.util.Locale;
 
 public class Texto {
 	
@@ -9,15 +9,15 @@ public class Texto {
 		 if (texto == null || texto.isEmpty()) {
 			 throw new Exception("Existen campos de texto vacios");
 		    }
-		texto.toLowerCase();
-		texto.trim();
+		texto=texto.toLowerCase(Locale.ROOT);
+		texto=texto.trim();
 		return texto.substring(0, 1).toUpperCase() + texto.substring(1);
 	}
 	
 	public static String validarEmail(String texto) throws Exception
 	{
-		texto.trim();
-		texto.toLowerCase();
+		texto=texto.trim();
+		texto=texto.toLowerCase();
 		if(!texto.contains("@"))
 		{
 			throw new Exception("El email debe contener @");
@@ -31,7 +31,7 @@ public class Texto {
 		{
 			throw new Exception("El dni debe tener 8 digitos");
 		}
-		dni.trim();
+		dni=dni.trim();
 		Integer n_dni;
 		try
 		{

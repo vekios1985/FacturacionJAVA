@@ -1,6 +1,6 @@
 package org.facturacion.principal.controllers.clientes;
 
-import java.awt.TrayIcon.MessageType;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +17,7 @@ import org.facturacion.principal.vista.clientes.FormAltaCliente;
 public class AltaClienteController {
 	
 	
+	@SuppressWarnings("unused")
 	private FormPrincipal principal;
 	private FormAltaCliente altaCliente;
 	private IClientesService clienteServive;

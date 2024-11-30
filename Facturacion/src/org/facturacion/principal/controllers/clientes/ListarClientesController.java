@@ -9,6 +9,7 @@ import org.facturacion.principal.models.Cliente;
 import org.facturacion.principal.services.ClienteService;
 import org.facturacion.principal.services.IClientesService;
 import org.facturacion.principal.utils.GenerarExcel;
+import org.facturacion.principal.utils.GenerarPdf;
 import org.facturacion.principal.vista.FormPrincipal;
 import org.facturacion.principal.vista.clientes.FormListadoClientes;
 
@@ -112,6 +113,13 @@ public class ListarClientesController {
 					GenerarExcel.CrearDocumento(columnas, datos);
 				}
 
+			}
+			if(e.getSource()==frmListado.btnPdf)
+			{
+				if(frmListado.tableModel.getRowCount()>0)
+				{
+					GenerarPdf.exportarJTableAPDF(frmListado.tableClientes);
+				}
 			}
 
 		}

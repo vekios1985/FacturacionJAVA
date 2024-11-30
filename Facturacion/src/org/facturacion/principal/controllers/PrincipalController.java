@@ -13,16 +13,20 @@ import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.services.ILoginService;
 import org.facturacion.principal.services.LoginService;
 import org.facturacion.principal.vista.FormPrincipal;
-import org.facturacion.principal.vista.clientes.FormAltaCliente;
 
+@SuppressWarnings("unused")
 public class PrincipalController {
 
 	public FormPrincipal formPrincipal;
+
 	private AltaClienteController altaClienteController;
+
 	private AltaIvaController altaIva;
+
 	private ListarClientesController listarClientesController;
 	private LoginController controllerLogin;
 	public Usuario usuario = null;
+
 	private ILoginService service;
 
 	public PrincipalController(FormPrincipal principal) {
@@ -56,7 +60,7 @@ public class PrincipalController {
 		// Falta agregar la habilitacion de roles
 
 		try {
-			Role role = service.obtenerRole(usuario);
+			//Role role = service.obtenerRole(usuario);
 			this.formPrincipal.mnNewMenuClientes.setEnabled(true);
 			this.formPrincipal.mnNewMenuProveedores.setEnabled(true);
 			this.formPrincipal.mnNewMenuProductos.setEnabled(true);

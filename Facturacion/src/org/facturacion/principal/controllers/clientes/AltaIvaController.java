@@ -13,6 +13,7 @@ import org.facturacion.principal.vista.administracion.FormAltaIva;
 
 public class AltaIvaController {
 	
+	@SuppressWarnings("unused")
 	private FormPrincipal principal;
 	private FormAltaIva altaIva;
 	private ClienteService service;
