@@ -44,6 +44,7 @@ public class DaoItemProducto implements IDao<ItemProducto>{
 		if(producto!=null&&proveedor!=null)
 		{
 			item=new ItemProducto(producto,proveedor,st.getDouble("stock"),st.getDouble("precio"));
+			item.setId(st.getLong("id_item"));
 		}
 		return item;
 	}
@@ -75,7 +76,7 @@ public class DaoItemProducto implements IDao<ItemProducto>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into items_productos id_producto,id_proveedor,stock,precio values(?,?,?,?)";
+			sql="insert into items_productos (id_producto,id_proveedor,stock,precio) values(?,?,?,?)";
 		}
 		else
 		{

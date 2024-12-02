@@ -6,12 +6,26 @@ public class Texto {
 	
 	public static String normalizar(String texto) throws Exception
 	{
+				
 		 if (texto == null || texto.isEmpty()) {
-			 throw new Exception("Existen campos de texto vacios");
-		    }
-		texto=texto.toLowerCase(Locale.ROOT);
-		texto=texto.trim();
-		return texto.substring(0, 1).toUpperCase() + texto.substring(1);
+			 throw new Exception("Existen campos de texto vacios");}
+		 texto=texto.trim();
+	        // Dividir el texto en palabras
+	        String[] palabras = texto.toLowerCase().split("\\s+"); // Divide por espacios
+	        
+	        StringBuilder textoNormalizado = new StringBuilder();
+	        
+	        for (String palabra : palabras) {
+	            // Convertir la primera letra en mayúscula y el resto en minúscula
+	            if (!palabra.isEmpty()) {
+	                textoNormalizado.append(Character.toUpperCase(palabra.charAt(0)))
+	                                .append(palabra.substring(1))
+	                                .append(" ");
+	            }
+	        }
+	        
+	        // Retornar el texto normalizado eliminando el espacio final
+	        return textoNormalizado.toString().trim();
 	}
 	
 	public static String validarEmail(String texto) throws Exception

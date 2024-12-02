@@ -3,11 +3,16 @@ package org.facturacion.principal.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import org.facturacion.principal.controllers.clientes.AltaClienteController;
 import org.facturacion.principal.controllers.clientes.AltaIvaController;
 import org.facturacion.principal.controllers.clientes.ListarClientesController;
+import org.facturacion.principal.controllers.productos.CargarProductoController;
+import org.facturacion.principal.controllers.productos.CategoriasController;
+import org.facturacion.principal.controllers.productos.ListarProductosController;
+import org.facturacion.principal.controllers.productos.StockController;
 import org.facturacion.principal.controllers.proveedores.AltaProveedoresController;
 import org.facturacion.principal.controllers.proveedores.ListarProveedoresController;
 import org.facturacion.principal.models.Role;
@@ -27,6 +32,10 @@ public class PrincipalController {
 	private ListarProveedoresController listarProveedoresController;
 	private ListarClientesController listarClientesController;
 	private LoginController controllerLogin;
+	private CategoriasController categoriasController;
+	private CargarProductoController cargarProductoController;
+	private StockController stockController;
+	private ListarProductosController listarProductosController;
 	public Usuario usuario = null;
 
 	private ILoginService service;
@@ -92,6 +101,11 @@ public class PrincipalController {
 		formPrincipal.mntmEditarProveedor.addActionListener(accionesMenu);
 		formPrincipal.mntmListarProveedor.addActionListener(accionesMenu);
 		formPrincipal.mntmNuevoProveedor.addActionListener(accionesMenu);
+		formPrincipal.mntmCategorias.addActionListener(accionesMenu);
+		formPrincipal.mntmAltaProducto.addActionListener(accionesMenu);
+		formPrincipal.mntmEditarProducto.addActionListener(accionesMenu);
+		formPrincipal.mntmListarProductos.addActionListener(accionesMenu);
+		formPrincipal.mntmIngresarStock.addActionListener(accionesMenu);
 	}
 	
 	ActionListener accionesMenu=new ActionListener() {
@@ -162,7 +176,24 @@ public class PrincipalController {
 				listarProveedoresController=new ListarProveedoresController(formPrincipal);
 				
 			}
+			if(e.getSource()==formPrincipal.mntmCategorias)
+			{
+				categoriasController=new CategoriasController(formPrincipal);
+			}
 			
+			if(e.getSource()==formPrincipal.mntmAltaProducto)
+			{
+				cargarProductoController=new CargarProductoController(formPrincipal);
+			}
+			
+			if(e.getSource()==formPrincipal.mntmIngresarStock)
+			{
+				stockController=new StockController(formPrincipal);
+			}
+			if(e.getSource()==formPrincipal.mntmListarProductos)
+			{
+				listarProductosController=new ListarProductosController(formPrincipal);
+			}
 			
 		}
 	};

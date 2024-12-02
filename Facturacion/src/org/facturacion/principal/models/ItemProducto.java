@@ -13,6 +13,8 @@ public class ItemProducto {
 	
 	public ItemProducto() {
 		this.id=0L;
+		this.stock=0D;
+		this.precio=0D;
 	}
 	public ItemProducto(Producto producto, Proveedor proveedor, Double stock, Double precio) {
 		
@@ -20,6 +22,8 @@ public class ItemProducto {
 		this.proveedor = proveedor;
 		this.stock = stock;
 		this.precio = precio;
+		this.id=0L;
+		
 	}
 	public Long getId() {
 		return id;

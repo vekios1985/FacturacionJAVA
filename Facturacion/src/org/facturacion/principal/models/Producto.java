@@ -10,6 +10,7 @@ public class Producto {
 	
 	
 	public Producto(String nombre, Categoria categoria,Long codigo) {
+		this.id=0L;
 		this.nombre = nombre;
 		this.categoria = categoria;
 		this.codigo=codigo;

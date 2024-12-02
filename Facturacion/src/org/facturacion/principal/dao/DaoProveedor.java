@@ -37,7 +37,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 	public Proveedor findById(Long id) throws SQLException, Exception {
 		Proveedor p=null;
 		try(Connection cnn=Conexion.getConnection();
-				PreparedStatement ps=cnn.prepareStatement("select * from proveedores where p.id_proveedor=?"))
+				PreparedStatement ps=cnn.prepareStatement("select * from proveedores where id_proveedor=?"))
 		{
 			ps.setLong(1, id);
 			ResultSet st=ps.executeQuery();

@@ -31,6 +31,11 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmNuevoProveedor;
 	public JMenuItem mntmEditarProveedor;
 	public JMenuItem mntmListarProveedor;
+	public JMenuItem mntmCategorias;
+	public JMenuItem mntmAltaProducto;
+	public JMenuItem mntmEditarProducto;
+	public JMenuItem mntmListarProductos;
+	public JMenuItem mntmIngresarStock;
 	/**
 	 * Launch the application.
 	 */
@@ -112,6 +117,18 @@ public class FormPrincipal extends JFrame {
 		mnNewMenuProductos = new JMenu("Productos");
 		menuBar.add(mnNewMenuProductos);
 		
+		mntmAltaProducto = new JMenuItem("Cargar Producto");
+		mnNewMenuProductos.add(mntmAltaProducto);
+		
+		mntmEditarProducto = new JMenuItem("Editar Producto");
+		mnNewMenuProductos.add(mntmEditarProducto);
+		
+		mntmListarProductos = new JMenuItem("Listar Productos");
+		mnNewMenuProductos.add(mntmListarProductos);
+		
+		mntmIngresarStock = new JMenuItem("Ingresar Mercaderia");
+		mnNewMenuProductos.add(mntmIngresarStock);
+		
 		mnNewMenuVentas = new JMenu("Ventas");
 		menuBar.add(mnNewMenuVentas);
 		
@@ -123,6 +140,9 @@ public class FormPrincipal extends JFrame {
 		
 		mntmAltaIva = new JMenuItem("Alta Item IVA");
 		mnNewMenuAdministracion.add(mntmAltaIva);
+		
+		mntmCategorias = new JMenuItem("Categoria productos");
+		mnNewMenuAdministracion.add(mntmCategorias);
 		
 		
 		contentPane = new JPanel();

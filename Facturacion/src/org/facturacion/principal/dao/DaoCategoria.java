@@ -29,7 +29,7 @@ public class DaoCategoria implements IDao<Categoria>{
 
 	private Categoria getCategoria(ResultSet st) throws SQLException {
 		Categoria cat=new Categoria();
-		cat.setId(st.getLong("id_categoria"));
+		cat.setId(st.getLong("id_categorias"));
 		cat.setNombre(st.getString("nombre"));
 		return cat;
 	}
@@ -51,12 +51,12 @@ public class DaoCategoria implements IDao<Categoria>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into categorias_productos nombre values(?)";
+			sql="insert into categorias_productos (nombre) values(?)";
 		}
 		else
 		{
 			
-				sql="update categorias_productos set nombre=? where id_categoria=?";
+				sql="update categorias_productos set nombre=? where id_categorias=?";
 		}
 		try(Connection cnn=Conexion.getConnection();
 				PreparedStatement ps=cnn.prepareStatement(sql))

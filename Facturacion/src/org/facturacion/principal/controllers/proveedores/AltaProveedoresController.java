@@ -14,7 +14,7 @@ import org.facturacion.principal.vista.proveedores.FormAgregarProveedor;
 
 public class AltaProveedoresController {
 	
-	private FormPrincipal principal;
+	//private FormPrincipal principal;
 	private FormAgregarProveedor formProveedor;
 	private IProveedorService service;
 	private boolean editable;
@@ -22,7 +22,7 @@ public class AltaProveedoresController {
 	
 	public AltaProveedoresController(FormPrincipal principal,boolean editable)
 	{
-		this.principal=principal;
+		//this.principal=principal;
 		this.formProveedor=new FormAgregarProveedor(principal, true);
 		this.editable=editable;
 		this.formProveedor.btnGuardar.addActionListener(ac);
