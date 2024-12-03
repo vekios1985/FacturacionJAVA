@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.facturacion.principal.models.Factura;
+import org.facturacion.principal.models.TipoFactura;
 import org.facturacion.principal.utils.Conexion;
 
 public class DaoNumeracion {
@@ -29,10 +30,14 @@ public class DaoNumeracion {
 			{
 				numero=rs.getInt("secuencia")+1;
 			}
+			else
+				numero=0;
 		}
 		
 		return numero;
 	}
+	
+	
 	
 	public void saveFacturaYNumeracion(Factura factura) throws SQLException, Exception {
 		Connection cnn=Conexion.getConnection();

@@ -25,6 +25,8 @@ public interface IProductoService {
 	
 	public ItemProducto findItem(Producto producto,Proveedor proveedor)throws Exception;
 	
+	public ItemProducto findItem(Long codigo)throws Exception;
+	
 	public List<ItemProducto> findAllItems()throws Exception;
 	
 	public List<ItemProducto> findItemsByName(String name)throws Exception;

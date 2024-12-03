@@ -36,21 +36,12 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmEditarProducto;
 	public JMenuItem mntmListarProductos;
 	public JMenuItem mntmIngresarStock;
+	public FormFacturacion panel;
+	public JMenuItem mntmTipoFactura;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FormPrincipal frame = new FormPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -79,7 +70,7 @@ public class FormPrincipal extends JFrame {
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 900, 600);
+		setBounds(100, 100, 1300, 680);
 		this.setLocationRelativeTo(null);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -144,12 +135,17 @@ public class FormPrincipal extends JFrame {
 		mntmCategorias = new JMenuItem("Categoria productos");
 		mnNewMenuAdministracion.add(mntmCategorias);
 		
+		mntmTipoFactura = new JMenuItem("Nuevo Tipo Factura");
+		mnNewMenuAdministracion.add(mntmTipoFactura);
+		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		panel = new FormFacturacion();
+		contentPane.add(panel, BorderLayout.CENTER);
 	}
-
 }

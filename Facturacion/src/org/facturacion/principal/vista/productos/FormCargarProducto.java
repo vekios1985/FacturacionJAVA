@@ -28,6 +28,7 @@ public class FormCargarProducto extends JDialog {
 	public AutocompleteComboBox comboBoxCategoria;
 	public DefaultComboBoxModel<Categoria>modelo;
 	public JButton btnAgregar;
+	public JButton btnBuscar;
 
 	
 	public FormCargarProducto(JFrame frame,boolean modal) {
@@ -80,5 +81,9 @@ public class FormCargarProducto extends JDialog {
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(176, 180, 89, 23);
 		getContentPane().add(btnAgregar);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(10, 180, 89, 23);
+		getContentPane().add(btnBuscar);
 	}
 }

@@ -65,5 +65,16 @@ public class Venta {
 		total=total-total*this.factura.getDescuento()/100;
 		return total;
 	}
+	
+	public Double getSubTotal()
+	{
+		Double total=0D;
+		for(ItemFactura i:items)
+		{
+			total+=i.getMonto();
+		}
+		
+		return total;
+	}
 
 }

@@ -36,6 +36,8 @@ public class PrincipalController {
 	private CargarProductoController cargarProductoController;
 	private StockController stockController;
 	private ListarProductosController listarProductosController;
+	private FacturacionController facturacion;
+	private AltaTipoFacturaController tipoFacturaController;
 	public Usuario usuario = null;
 
 	private ILoginService service;
@@ -63,6 +65,8 @@ public class PrincipalController {
 			deshabilitar();
 			System.out.println("deshabilitado");
 		}
+		
+		facturacion=new FacturacionController(formPrincipal);
 		setActionListener();
 
 	}
@@ -106,6 +110,7 @@ public class PrincipalController {
 		formPrincipal.mntmEditarProducto.addActionListener(accionesMenu);
 		formPrincipal.mntmListarProductos.addActionListener(accionesMenu);
 		formPrincipal.mntmIngresarStock.addActionListener(accionesMenu);
+		formPrincipal.mntmTipoFactura.addActionListener(accionesMenu);
 	}
 	
 	ActionListener accionesMenu=new ActionListener() {
@@ -183,7 +188,11 @@ public class PrincipalController {
 			
 			if(e.getSource()==formPrincipal.mntmAltaProducto)
 			{
-				cargarProductoController=new CargarProductoController(formPrincipal);
+				cargarProductoController=new CargarProductoController(formPrincipal,false);
+			}
+			if(e.getSource()==formPrincipal.mntmEditarProducto)
+			{
+				cargarProductoController=new CargarProductoController(formPrincipal,true);
 			}
 			
 			if(e.getSource()==formPrincipal.mntmIngresarStock)
@@ -193,6 +202,11 @@ public class PrincipalController {
 			if(e.getSource()==formPrincipal.mntmListarProductos)
 			{
 				listarProductosController=new ListarProductosController(formPrincipal);
+			}
+			
+			if(e.getSource()==formPrincipal.mntmTipoFactura)
+			{
+				tipoFacturaController=new AltaTipoFacturaController();
 			}
 			
 		}

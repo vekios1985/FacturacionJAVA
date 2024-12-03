@@ -58,8 +58,15 @@ public class ProductoService implements IProductoService{
 
 	@Override
 	public Producto findByCodigo(Long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Producto producto=null;
+		
+		for(Producto p:findAllProductos())
+		{
+			if(p.getCodigo().equals(codigo))
+				return p;
+		}
+		
+		return producto;
 	}
 
 	@Override
@@ -137,6 +144,23 @@ public class ProductoService implements IProductoService{
 				lista.add(item);
 		}
 		return lista;
+	}
+
+	@Override
+	public ItemProducto findItem(Long codigo) throws Exception {
+		List<ItemProducto>lista=daoItem.findAll();
+		Optional<ItemProducto> item=lista.stream().filter(i->
+			i.getProducto().getCodigo().equals(codigo)).findFirst();
+		
+		if(item.isPresent())
+		{
+			if(item.get().getStock()>0)
+				return item.get();
+			else
+				return null;
+		}
+		else
+			return null;
 	}
 
 }

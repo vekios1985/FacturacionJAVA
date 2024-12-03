@@ -23,5 +23,11 @@ public class TipoFactura {
 		this.tipo = tipo;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return tipo;
+	}
+	
 
 }
