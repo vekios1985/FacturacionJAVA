@@ -24,6 +24,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
+		this.id=0L;
 	}
 	public Long getId() {
 		return id;

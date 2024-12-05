@@ -47,7 +47,7 @@ public class DaoCajas implements IDao<Caja>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into cajas nombre values(?)";
+			sql="insert into cajas (nombre) values(?)";
 		}
 		else
 		{

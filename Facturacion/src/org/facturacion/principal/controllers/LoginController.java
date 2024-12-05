@@ -14,8 +14,10 @@ public class LoginController {
 	ILoginService service;
 	public FormLogin login;
 	public Usuario usuario;
+	private FormPrincipal principal;
 
 	public LoginController(FormPrincipal formPrincipal, boolean modal) {
+		principal=formPrincipal;
 		service=new LoginService();
 		usuario=null;
 		login = new FormLogin(formPrincipal, modal);
@@ -31,6 +33,11 @@ public class LoginController {
 		login.btnSalir.addActionListener(ac);
 			}
 	
+	public Usuario getUser()
+	{
+		return usuario;
+	}
+	
 	ActionListener ac=new ActionListener() {
 		
 		@Override
@@ -44,8 +51,10 @@ public class LoginController {
 			if(e.getSource()==login.btnIngresar)
 			{
 				usuario=validarUsuario();
-				if(usuario!=null)
+				if(usuario!=null) {
+					
 					login.dispose();
+				}
 			}
 			
 		}

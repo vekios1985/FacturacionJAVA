@@ -13,10 +13,10 @@ import org.facturacion.principal.utils.Conexion;
 
 public class DaoTipoFactura implements IDao<TipoFactura> {
 
-	private DaoNumeracion numeracion;
+	//private DaoNumeracion numeracion;
 
 	public DaoTipoFactura() {
-		numeracion = new DaoNumeracion();// TODO Auto-generated constructor stub
+		//numeracion = new DaoNumeracion();// TODO Auto-generated constructor stub
 	}
 
 	@Override

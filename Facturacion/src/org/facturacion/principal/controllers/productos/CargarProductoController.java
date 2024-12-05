@@ -2,8 +2,7 @@ package org.facturacion.principal.controllers.productos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
-import java.util.List;
+
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -12,7 +11,6 @@ import org.facturacion.principal.models.Categoria;
 import org.facturacion.principal.models.Producto;
 import org.facturacion.principal.services.productos.IProductoService;
 import org.facturacion.principal.services.productos.ProductoService;
-import org.facturacion.principal.utils.AutocompleteComboBox;
 import org.facturacion.principal.utils.Texto;
 import org.facturacion.principal.vista.FormPrincipal;
 import org.facturacion.principal.vista.productos.FormCargarProducto;
@@ -34,6 +32,7 @@ public class CargarProductoController {
 		formProducto.setVisible(true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	void CargarComboBox()
 	{
 		if(modificar)

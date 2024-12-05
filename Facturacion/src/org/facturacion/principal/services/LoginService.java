@@ -1,6 +1,7 @@
 package org.facturacion.principal.services;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.facturacion.principal.dao.DaoRole;
@@ -55,6 +56,24 @@ public class LoginService implements ILoginService{
 		
 			
 		return null;
+	}
+
+	@Override
+	public List<Usuario> findAllUser() throws Exception {
+		return daousuario.findAll();
+	}
+
+	@Override
+	public void saveUser(Usuario user) throws Exception {
+		try
+		{
+			daousuario.save(user);
+		}
+		catch(SQLIntegrityConstraintViolationException ex)
+		{
+			throw new Exception("El nombre de usuario o dni ya existe");
+		}
+		
 	}
 	
 	

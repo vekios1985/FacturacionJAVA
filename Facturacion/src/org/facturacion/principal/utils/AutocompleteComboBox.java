@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 
 
+@SuppressWarnings("rawtypes")
 public class AutocompleteComboBox extends JComboBox {
 	   
 	private static final long serialVersionUID = 1L;
@@ -19,6 +20,7 @@ public class AutocompleteComboBox extends JComboBox {
 	public JTextField tfield = null;
 	  
 	  
+	@SuppressWarnings("unchecked")
 	public AutocompleteComboBox(DefaultComboBoxModel modelo) {
 	      super(modelo);
 	      setEditor(new BasicComboBoxEditor());

@@ -14,7 +14,6 @@ import org.facturacion.principal.utils.AutocompleteComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 
 public class FormCargarProducto extends JDialog {
 

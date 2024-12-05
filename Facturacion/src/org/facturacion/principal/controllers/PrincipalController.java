@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import org.facturacion.principal.controllers.cajas.AltaCajasController;
 import org.facturacion.principal.controllers.clientes.AltaClienteController;
 import org.facturacion.principal.controllers.clientes.AltaIvaController;
 import org.facturacion.principal.controllers.clientes.ListarClientesController;
@@ -25,6 +27,8 @@ import org.facturacion.principal.vista.FormPrincipal;
 public class PrincipalController {
 
 	public FormPrincipal formPrincipal;
+	
+	
 
 	private AltaClienteController altaClienteController;
 	private AltaProveedoresController altaProveedoresController;
@@ -38,15 +42,18 @@ public class PrincipalController {
 	private ListarProductosController listarProductosController;
 	private FacturacionController facturacion;
 	private AltaTipoFacturaController tipoFacturaController;
+	private AltaCajasController  altaCajaController;
+	private NuevoUsuarioController usuarioNuevoController;
 	public Usuario usuario = null;
 
 	private ILoginService service;
 
 	public PrincipalController(FormPrincipal principal) {
+		
 		formPrincipal = principal;
 		formPrincipal.setVisible(true);
 		service = new LoginService();
-		
+		//usuario=service.
 		deshabilitar();
 		
 		iniciarController();
@@ -66,7 +73,7 @@ public class PrincipalController {
 			System.out.println("deshabilitado");
 		}
 		
-		facturacion=new FacturacionController(formPrincipal);
+		facturacion=new FacturacionController(formPrincipal,usuario);
 		setActionListener();
 
 	}
@@ -111,6 +118,8 @@ public class PrincipalController {
 		formPrincipal.mntmListarProductos.addActionListener(accionesMenu);
 		formPrincipal.mntmIngresarStock.addActionListener(accionesMenu);
 		formPrincipal.mntmTipoFactura.addActionListener(accionesMenu);
+		formPrincipal.mntmAltaCaja.addActionListener(accionesMenu);
+		formPrincipal.mntmUsuarios.addActionListener(accionesMenu);
 	}
 	
 	ActionListener accionesMenu=new ActionListener() {
@@ -207,6 +216,16 @@ public class PrincipalController {
 			if(e.getSource()==formPrincipal.mntmTipoFactura)
 			{
 				tipoFacturaController=new AltaTipoFacturaController();
+			}
+			
+			if(e.getSource()==formPrincipal.mntmAltaCaja)
+			{
+				altaCajaController=new AltaCajasController(formPrincipal);
+			}
+			
+			if(e.getSource()==formPrincipal.mntmUsuarios)
+			{
+				usuarioNuevoController=new NuevoUsuarioController(formPrincipal);
 			}
 			
 		}

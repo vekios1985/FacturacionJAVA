@@ -49,6 +49,7 @@ public class FormFacturacion extends JPanel {
 	public JLabel lblObservacion;
 	public JLabel lblFechaValor;
 	public JLabel lblTipoFactura;
+	@SuppressWarnings("rawtypes")
 	public JComboBox comboBoxTipoFactura;
 	public JLabel lblNumero;
 	public JLabel lblNumeroFacturaValor;
@@ -64,10 +65,16 @@ public class FormFacturacion extends JPanel {
 	public JLabel lblva;
 	public JRadioButton rdbtnDni;
 	public JRadioButton rdbtnApellido;
+	public JButton btnSeleccionarCaja;
+	public JLabel lblCajaValor;
+	public JLabel lblCaja;
+	public JLabel lblUsuario;
+	public JLabel lblUsuarioValor;
 	
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("rawtypes")
 	public FormFacturacion() {
 		setLayout(null);
 		this.setPreferredSize(new Dimension(1270,610));
@@ -301,6 +308,30 @@ public class FormFacturacion extends JPanel {
 		textArea = new JTextArea();
 		textArea.setBounds(339, 16, 501, 93);
 		panel_2.add(textArea);
+		
+		btnSeleccionarCaja = new JButton("Seleccionar caja");
+		btnSeleccionarCaja.setBounds(732, 32, 128, 23);
+		add(btnSeleccionarCaja);
+		
+		lblCajaValor = new JLabel("...");
+		lblCajaValor.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCajaValor.setBounds(917, 577, 78, 23);
+		add(lblCajaValor);
+		
+		lblCaja = new JLabel("Caja:");
+		lblCaja.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCaja.setBounds(870, 576, 58, 23);
+		add(lblCaja);
+		
+		lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblUsuario.setBounds(1078, 577, 64, 18);
+		add(lblUsuario);
+		
+		lblUsuarioValor = new JLabel("...");
+		lblUsuarioValor.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblUsuarioValor.setBounds(1152, 577, 108, 18);
+		add(lblUsuarioValor);
 
 	}
 }

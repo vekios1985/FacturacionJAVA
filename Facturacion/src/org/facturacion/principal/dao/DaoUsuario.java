@@ -80,7 +80,7 @@ public class DaoUsuario implements IDao<Usuario>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into usuarios id_role,username,password,nombre,apellido,dni values(?,?,?,?,?,?)";
+			sql="insert into usuarios (id_role,username,password,nombre,apellido,dni) values(?,?,?,?,?,?)";
 		}
 		else
 		{

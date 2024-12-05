@@ -6,7 +6,7 @@ import org.facturacion.principal.models.Caja;
 
 public interface ICajasService {
 	
-	public void save(Caja caja)throws Exception;
+	public void save(String nombre)throws Exception;
 	
 	public List<Caja> findAll()throws Exception;
 	

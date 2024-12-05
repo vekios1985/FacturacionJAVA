@@ -8,7 +8,6 @@ import java.awt.event.ItemListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-import org.facturacion.principal.dao.DaoProducto;
 import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.Producto;
 import org.facturacion.principal.models.Proveedor;
@@ -38,6 +37,7 @@ public class StockController {
 		formStock.setVisible(true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void CargarCombos()
 	{
 		try {
@@ -106,8 +106,8 @@ public class StockController {
 				{
 					if(formStock.comboBoxProducto.getSelectedItem()!=null&&formStock.comboBoxProveedor.getSelectedItem()!=null)
 					{
-						Producto producto=(Producto) formStock.comboBoxProducto.getSelectedItem();
-						Proveedor proveedor=(Proveedor) formStock.comboBoxProveedor.getSelectedItem();
+						//Producto producto=(Producto) formStock.comboBoxProducto.getSelectedItem();
+						//Proveedor proveedor=(Proveedor) formStock.comboBoxProveedor.getSelectedItem();
 						Double precio=Double.parseDouble(formStock.textFieldPrecio.getText());
 						Double stock=Double.parseDouble(formStock.textFieldStock.getText());
 						if(precio<0||stock<0)

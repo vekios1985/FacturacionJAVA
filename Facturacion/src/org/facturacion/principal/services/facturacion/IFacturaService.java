@@ -1,6 +1,6 @@
 package org.facturacion.principal.services.facturacion;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 import org.facturacion.principal.models.Factura;

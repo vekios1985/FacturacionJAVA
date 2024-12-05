@@ -86,6 +86,7 @@ public class ListarProductosController {
 		}
 	};
 
+	@SuppressWarnings("unchecked")
 	private void cargarComboProveedor() {
 		formProductos.comboBoxProveedor.removeAllItems();
 		try {
@@ -98,6 +99,7 @@ public class ListarProductosController {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void cargarComboCategoria() {
 		formProductos.comboBoxCategoria.removeAllItems();
 		try {

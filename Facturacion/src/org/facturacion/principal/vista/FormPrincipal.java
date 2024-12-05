@@ -1,6 +1,5 @@
 package org.facturacion.principal.vista;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,6 +37,8 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmIngresarStock;
 	public FormFacturacion panel;
 	public JMenuItem mntmTipoFactura;
+	public JMenuItem mntmAltaCaja;
+	public JMenuItem mntmUsuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -137,6 +138,12 @@ public class FormPrincipal extends JFrame {
 		
 		mntmTipoFactura = new JMenuItem("Nuevo Tipo Factura");
 		mnNewMenuAdministracion.add(mntmTipoFactura);
+		
+		mntmAltaCaja = new JMenuItem("Nueva Caja");
+		mnNewMenuAdministracion.add(mntmAltaCaja);
+		
+		mntmUsuarios = new JMenuItem("Usuarios");
+		mnNewMenuAdministracion.add(mntmUsuarios);
 		
 		
 		contentPane = new JPanel();

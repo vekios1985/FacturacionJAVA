@@ -13,16 +13,19 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.facturacion.principal.controllers.cajas.SeleccionCajaController;
+import org.facturacion.principal.models.Caja;
 import org.facturacion.principal.models.Cliente;
 import org.facturacion.principal.models.Factura;
 import org.facturacion.principal.models.ItemFactura;
 import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.TipoFactura;
+import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.models.Venta;
 import org.facturacion.principal.services.clientes.ClienteService;
 import org.facturacion.principal.services.clientes.IClientesService;
@@ -44,15 +47,18 @@ public class FacturacionController {
 	Venta venta;
 	Factura factura;
 	Cliente cliente;
+	Usuario usuario;
+	Caja caja;
 	
 	private int itemCount;
 
-	public FacturacionController(FormPrincipal principal) {
+	public FacturacionController(FormPrincipal principal,Usuario user) {
 		this.principal = principal;
+		caja=null;
 		serviceProducto = new ProductoService();
 		serviceCliente = new ClienteService();
 		serviceFactura=new FacturaService();
-		
+		this.usuario=user;
 		agregarActionListener();
 		cargarTabla();
 		
@@ -61,6 +67,7 @@ public class FacturacionController {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	void CargarComboFactura()
 	{
 		principal.panel.comboBoxTipoFactura.removeAllItems();
@@ -106,38 +113,64 @@ public class FacturacionController {
 		}
 	};
 	
+	public void setPanelEnabled(JPanel panel, boolean enabled) {
+	    panel.setEnabled(enabled); // Esto afecta al propio panel (por ejemplo, en términos visuales).
+	    for (Component component : panel.getComponents()) {
+	        component.setEnabled(enabled); // Desactiva todos los hijos del panel.
+	        if (component instanceof JPanel) {
+	            // Si hay un JPanel anidado, desactiva también sus hijos.
+	            setPanelEnabled((JPanel) component, enabled);
+	        }
+	    }
+	}
+	
 	void iniciarVenta()
 	{
-		itemCount = 0;
-		listaItems = new ArrayList<ItemFactura>();
-		factura=new Factura();
-		factura.setDescuento(0D);
-		venta=new Venta();
-		venta.setFactura(factura);
-		venta.setItems(listaItems);
-		CargarComboFactura();
-		try {
-			cliente=serviceCliente.findByDni(99999999);
-			if(cliente==null)
+		if(usuario!=null)
+		{
+			if(caja==null)
 			{
-				principal.panel.lblDniValor.setText("");
-				principal.panel.lblNombreYApellidoValor.setText("");
-				principal.panel.lblIvaValor.setText("");
+				setPanelEnabled(principal.panel, false);
+				principal.panel.btnSeleccionarCaja.setEnabled(true);
 			}
 			else
 			{
-				principal.panel.lblDniValor.setText(cliente.getDni().toString());
-				principal.panel.lblNombreYApellidoValor.setText(cliente.getNombre()+" "+cliente.getApellido());
-				principal.panel.lblIvaValor.setText(cliente.getIva().getNombre());
+				principal.panel.lblUsuarioValor.setText(usuario.getUsername());
+				setPanelEnabled(principal.panel, true);
+				itemCount = 0;
+				listaItems = new ArrayList<ItemFactura>();
+				factura=new Factura();
+				factura.setDescuento(0D);
+				venta=new Venta();
+				venta.setFactura(factura);
+				venta.setItems(listaItems);
+				CargarComboFactura();
+				try {
+					cliente=serviceCliente.findByDni(99999999);
+					if(cliente==null)
+					{
+						principal.panel.lblDniValor.setText("");
+						principal.panel.lblNombreYApellidoValor.setText("");
+						principal.panel.lblIvaValor.setText("");
+					}
+					else
+					{
+						principal.panel.lblDniValor.setText(cliente.getDni().toString());
+						principal.panel.lblNombreYApellidoValor.setText(cliente.getNombre()+" "+cliente.getApellido());
+						principal.panel.lblIvaValor.setText(cliente.getIva().getNombre());
+					}
+					principal.panel.rdbtnDni.setSelected(true);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			principal.panel.rdbtnDni.setSelected(true);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 		
 	}
 
+	@SuppressWarnings("serial")
 	void cargarTabla() {
 		
 		principal.panel.tableModel.addColumn("#");
@@ -181,6 +214,7 @@ public class FacturacionController {
 		principal.panel.btnCobrar.addActionListener(ac);
 		principal.panel.comboBoxTipoFactura.addItemListener(it);
 		principal.panel.btnBuscarCliente.addActionListener(ac);
+		principal.panel.btnSeleccionarCaja.addActionListener(ac);
 
 	}
 
@@ -390,6 +424,18 @@ public class FacturacionController {
 					{
 						JOptionPane.showMessageDialog(principal, ex.getMessage(), "Error", 0);
 					}
+				}
+			}
+			
+			if(e.getSource()==principal.panel.btnSeleccionarCaja)
+			{
+				
+				SeleccionCajaController cajasController=new SeleccionCajaController(principal);
+				caja=cajasController.getCaja();
+				if(caja!=null)
+				{
+				principal.panel.lblCajaValor.setText(caja.getNombre());
+				iniciarVenta();
 				}
 			}
 		
