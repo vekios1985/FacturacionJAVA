@@ -15,11 +15,13 @@ public class FormSeleccionCaja extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	@SuppressWarnings("rawtypes")
 	public JList list;
 	public JButton okButton ;
 	public JButton cancelButton;
 
 	
+	@SuppressWarnings("rawtypes")
 	public FormSeleccionCaja(JFrame frame) {
 		super(frame,true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

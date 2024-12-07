@@ -29,6 +29,7 @@ public class FormIngresarStock extends JDialog {
 	public AutocompleteComboBox comboBoxProveedor;
 	public JLabel lblInfo;
 	public JButton btnAgregar;
+	@SuppressWarnings("rawtypes")
 	public DefaultComboBoxModel modelo=new DefaultComboBoxModel();
 	
 	

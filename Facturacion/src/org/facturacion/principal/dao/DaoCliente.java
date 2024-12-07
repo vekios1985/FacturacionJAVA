@@ -9,14 +9,20 @@ import java.util.List;
 
 import org.facturacion.principal.models.Cliente;
 import org.facturacion.principal.models.Iva;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoCliente implements IDao<Cliente>{
+	
+private Connection cnn;
+	
+	public DaoCliente(Connection con) {
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Cliente> findAll() throws SQLException, Exception {
 		List<Cliente>lista=new ArrayList<Cliente>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from clientes c inner join iva i on c.id_iva=i.id_iva"))
 		{
 			while(st.next())
@@ -42,7 +48,7 @@ public class DaoCliente implements IDao<Cliente>{
 	@Override
 	public Cliente findById(Long id) throws SQLException, Exception {
 		Cliente p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from clientes c inner join iva i on c.id_iva=i.id_iva where c.id_cliente=?"))
 		{
 			ps.setLong(1, id);
@@ -59,7 +65,7 @@ public class DaoCliente implements IDao<Cliente>{
 	@Override
 	public Cliente findByString(String name) throws SQLException, Exception {
 		Cliente p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from clientes c inner join iva i on c.id_iva=i.id_iva where c.apellido=?"))
 		{
 			ps.setString(1, name);
@@ -87,7 +93,7 @@ public class DaoCliente implements IDao<Cliente>{
 				sql="update clientes set nombre=?,apellido=?,telefono=?,direccion=?,localidad=?,email=?,dni=?,id_iva=? where id_cliente=?";
 		}
 		
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());
@@ -107,7 +113,7 @@ public class DaoCliente implements IDao<Cliente>{
 
 	@Override
 	public void delete(Cliente object) throws SQLException, Exception {
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from clientes where id_cliente=?"))
 		{
 			ps.setLong(1, object.getId());			

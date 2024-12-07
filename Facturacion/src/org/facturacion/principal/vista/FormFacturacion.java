@@ -306,6 +306,7 @@ public class FormFacturacion extends JPanel {
 		panel_2.add(lblNumeroFacturaValor);
 		
 		textArea = new JTextArea();
+		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		textArea.setBounds(339, 16, 501, 93);
 		panel_2.add(textArea);
 		

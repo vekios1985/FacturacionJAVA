@@ -1,5 +1,6 @@
 package org.facturacion.principal.services.productos;
 
+import java.sql.Connection;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +13,21 @@ import org.facturacion.principal.models.Categoria;
 import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.Producto;
 import org.facturacion.principal.models.Proveedor;
+import org.facturacion.principal.utils.Conexion;
 
 public class ProductoService implements IProductoService{
 	
 	private DaoCategoria daoCategoria;
 	private DaoProducto daoProducto;
 	private DaoItemProducto daoItem;
+	private Connection cnn;
 	
-	public ProductoService()
+	public ProductoService()throws Exception
 	{
-		daoCategoria=new DaoCategoria();
-		daoProducto=new DaoProducto();
-		daoItem=new DaoItemProducto();
+		cnn=Conexion.getConnection();
+		daoCategoria=new DaoCategoria(cnn);
+		daoProducto=new DaoProducto(cnn);
+		daoItem=new DaoItemProducto(cnn);
 	}
 
 	@Override

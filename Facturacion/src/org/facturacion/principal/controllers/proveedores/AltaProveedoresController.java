@@ -22,14 +22,19 @@ public class AltaProveedoresController {
 	
 	public AltaProveedoresController(FormPrincipal principal,boolean editable)
 	{
-		//this.principal=principal;
-		this.formProveedor=new FormAgregarProveedor(principal, true);
-		this.editable=editable;
-		this.formProveedor.btnGuardar.addActionListener(ac);
-		this.formProveedor.btnBuscar.addActionListener(ac);
-		service=new ProveedorService();
-		setEditable();
-		this.formProveedor.setVisible(true);
+		try {
+			//this.principal=principal;
+			this.formProveedor=new FormAgregarProveedor(principal, true);
+			this.editable=editable;
+			this.formProveedor.btnGuardar.addActionListener(ac);
+			this.formProveedor.btnBuscar.addActionListener(ac);
+			service=new ProveedorService();
+			setEditable();
+			this.formProveedor.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 	}
 	
 	private void LimpiarCasillas()

@@ -1,15 +1,11 @@
 package org.facturacion.principal.vista.productos;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
+
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -27,7 +23,9 @@ public class FormListarProductos extends JDialog {
 	public JRadioButton rdbtnCategorias;
 	public JRadioButton rdbtnNombre;
 	public JRadioButton rdbtnProveedor;
+	@SuppressWarnings("rawtypes")
 	public JComboBox comboBoxCategoria;
+	@SuppressWarnings("rawtypes")
 	public JComboBox comboBoxProveedor;
 	public JButton btnListar;
 	public JButton btnExcel;
@@ -36,6 +34,7 @@ public class FormListarProductos extends JDialog {
 	
 
 	
+	@SuppressWarnings("rawtypes")
 	public FormListarProductos(JFrame frame,boolean modal) {
 		super(frame,modal);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

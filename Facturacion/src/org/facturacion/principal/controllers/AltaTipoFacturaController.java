@@ -13,8 +13,14 @@ public class AltaTipoFacturaController {
 	private IFacturaService service;
 	
 	public AltaTipoFacturaController() {
-		service=new FacturaService();
-		Ingresar();
+		try {
+			service=new FacturaService();
+			Ingresar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
+		
 		
 	}
 	

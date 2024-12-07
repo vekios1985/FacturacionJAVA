@@ -23,10 +23,15 @@ public class ListarProveedoresController {
 	private String[] columnas = { "Nombre", "Telefono", "eMail", "Dirección", "CUIT" };
 
 	public ListarProveedoresController(FormPrincipal princiapl) {
-		proveedores = new FormListarProveedores(princiapl, true);
-		inicio();
-		service = new ProveedorService();
-		proveedores.setVisible(true);
+		try {
+			proveedores = new FormListarProveedores(princiapl, true);
+			inicio();
+			service = new ProveedorService();
+			proveedores.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 		// TODO Auto-generated constructor stub
 	}
 

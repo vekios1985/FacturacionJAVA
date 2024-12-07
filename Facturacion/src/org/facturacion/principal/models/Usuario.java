@@ -68,5 +68,10 @@ public class Usuario {
 	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
+	
+	public String toString()
+	{
+		return username;
+	}
 
 }

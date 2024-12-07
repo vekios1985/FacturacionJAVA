@@ -7,14 +7,15 @@ import java.util.Optional;
 
 import org.facturacion.principal.dao.DaoProveedor;
 import org.facturacion.principal.models.Proveedor;
+import org.facturacion.principal.utils.Conexion;
 
 public class ProveedorService implements IProveedorService{
 	
 	private DaoProveedor daoProveedor;
 	
-	public ProveedorService()
+	public ProveedorService()throws Exception
 	{
-		daoProveedor=new DaoProveedor();
+		daoProveedor=new DaoProveedor(Conexion.getConnection());
 	}
 
 	@Override

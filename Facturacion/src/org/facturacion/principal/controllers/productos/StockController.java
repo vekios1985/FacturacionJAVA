@@ -27,14 +27,19 @@ public class StockController {
 	
 	
 	public StockController(FormPrincipal principal) {
-		formStock=new FormIngresarStock(principal, true);
-		serviceProducto=new ProductoService();
-		serviceProveedor=new ProveedorService();
-		CargarCombos();
-		formStock.comboBoxProducto.addItemListener(it);
-		formStock.comboBoxProveedor.addItemListener(it);
-		formStock.btnAgregar.addActionListener(ac);
-		formStock.setVisible(true);
+		try {
+			formStock=new FormIngresarStock(principal, true);
+			serviceProducto=new ProductoService();
+			serviceProveedor=new ProveedorService();
+			CargarCombos();
+			formStock.comboBoxProducto.addItemListener(it);
+			formStock.comboBoxProveedor.addItemListener(it);
+			formStock.btnAgregar.addActionListener(ac);
+			formStock.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

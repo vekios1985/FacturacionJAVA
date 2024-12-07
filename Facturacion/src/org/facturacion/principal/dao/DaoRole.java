@@ -10,14 +10,21 @@ import java.util.List;
 
 
 import org.facturacion.principal.models.Role;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoRole implements IDao<Role>{
+	
+	private Connection cnn;
+	
+	public DaoRole (Connection con)
+	{
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Role> findAll() throws SQLException, Exception {
 		List<Role>lista=new ArrayList<Role>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from roles"))
 		{
 			while(st.next())
@@ -56,7 +63,7 @@ public class DaoRole implements IDao<Role>{
 			
 				sql="update roles set role=? where id_role=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());

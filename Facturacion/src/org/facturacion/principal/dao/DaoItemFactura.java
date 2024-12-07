@@ -16,17 +16,18 @@ public class DaoItemFactura implements IDao<ItemFactura>{
 
 	private DaoProducto daoProducto;
 	private DaoFactura daoFactura;
-	
-	public DaoItemFactura()
+	private Connection cnn;
+	public DaoItemFactura(Connection con)
 	{
-		daoFactura=new DaoFactura();
-		daoProducto=new DaoProducto();
+		this.cnn=con;
+		daoFactura=new DaoFactura(con);
+		daoProducto=new DaoProducto(con);
 	}
 	
 	@Override
 	public List<ItemFactura> findAll() throws SQLException, Exception {
 		List<ItemFactura>lista=new ArrayList<ItemFactura>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from items_factura"))
 		{
 			while(st.next())
@@ -40,7 +41,7 @@ public class DaoItemFactura implements IDao<ItemFactura>{
 	
 	public List<ItemFactura> findByFacturaId(Long id) throws SQLException, Exception {
 		List<ItemFactura>lista=new ArrayList<ItemFactura>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from items_factura where id_factura=?"))
 		{
 			ps.setLong(1, id);
@@ -70,7 +71,7 @@ public class DaoItemFactura implements IDao<ItemFactura>{
 	@Override
 	public ItemFactura findById(Long id) throws SQLException, Exception {
 		ItemFactura p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from items_factura where p.id_item=?"))
 		{
 			ps.setLong(1, id);
@@ -95,14 +96,14 @@ public class DaoItemFactura implements IDao<ItemFactura>{
 		String sql;
 		if(object.getId()==0)
 		{
-			sql="insert into items_factura id_factura,id_producto,cantidad,precio values(?,?,?,?)";
+			sql="insert into items_factura (id_factura,id_producto,cantidad,precio) values(?,?,?,?)";
 		}
 		else
 		{
 			
 				sql="update items_factura set id_factura=?,id_producto=?,cantidad=?,precio=? where id_item=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setLong(1, object.getFactura().getId());

@@ -17,6 +17,9 @@ import org.facturacion.principal.controllers.productos.ListarProductosController
 import org.facturacion.principal.controllers.productos.StockController;
 import org.facturacion.principal.controllers.proveedores.AltaProveedoresController;
 import org.facturacion.principal.controllers.proveedores.ListarProveedoresController;
+import org.facturacion.principal.controllers.ventas.FacturaDetalleController;
+import org.facturacion.principal.controllers.ventas.ListarFacturasController;
+import org.facturacion.principal.controllers.ventas.VentasController;
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.services.ILoginService;
@@ -27,8 +30,6 @@ import org.facturacion.principal.vista.FormPrincipal;
 public class PrincipalController {
 
 	public FormPrincipal formPrincipal;
-	
-	
 
 	private AltaClienteController altaClienteController;
 	private AltaProveedoresController altaProveedoresController;
@@ -42,28 +43,36 @@ public class PrincipalController {
 	private ListarProductosController listarProductosController;
 	private FacturacionController facturacion;
 	private AltaTipoFacturaController tipoFacturaController;
-	private AltaCajasController  altaCajaController;
+	private AltaCajasController altaCajaController;
 	private NuevoUsuarioController usuarioNuevoController;
+	private ListarFacturasController listarFacturasController;
+	private FacturaDetalleController detalleController;
+	private VentasController ventasController;
 	public Usuario usuario = null;
 
 	private ILoginService service;
 
 	public PrincipalController(FormPrincipal principal) {
-		
-		formPrincipal = principal;
-		formPrincipal.setVisible(true);
-		service = new LoginService();
-		//usuario=service.
-		deshabilitar();
-		
-		iniciarController();
+
+		try {
+			formPrincipal = principal;
+			formPrincipal.setVisible(true);
+			service = new LoginService();
+			deshabilitar();
+
+			iniciarController();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
+		// usuario=service.
 
 	}
 
 	void iniciarController() {
-		
+
 		controllerLogin = new LoginController(formPrincipal, true);
-		
+
 		usuario = controllerLogin.usuario;
 		if (usuario != null) {
 			habilitar(usuario);
@@ -72,8 +81,8 @@ public class PrincipalController {
 			deshabilitar();
 			System.out.println("deshabilitado");
 		}
-		
-		facturacion=new FacturacionController(formPrincipal,usuario);
+
+		facturacion = new FacturacionController(formPrincipal, usuario);
 		setActionListener();
 
 	}
@@ -82,7 +91,7 @@ public class PrincipalController {
 		// Falta agregar la habilitacion de roles
 
 		try {
-			//Role role = service.obtenerRole(usuario);
+			// Role role = service.obtenerRole(usuario);
 			this.formPrincipal.mnNewMenuClientes.setEnabled(true);
 			this.formPrincipal.mnNewMenuProveedores.setEnabled(true);
 			this.formPrincipal.mnNewMenuProductos.setEnabled(true);
@@ -102,9 +111,8 @@ public class PrincipalController {
 		this.formPrincipal.mnNewMenuVentas.setEnabled(false);
 		this.formPrincipal.mnNewMenuCajas.setEnabled(false);
 	}
-	
-	void setActionListener()
-	{
+
+	void setActionListener() {
 		formPrincipal.mntmAltaClientes.addActionListener(accionesMenu);
 		formPrincipal.mntmAltaIva.addActionListener(accionesMenu);
 		formPrincipal.mntmEditarCliente.addActionListener(accionesMenu);
@@ -120,117 +128,114 @@ public class PrincipalController {
 		formPrincipal.mntmTipoFactura.addActionListener(accionesMenu);
 		formPrincipal.mntmAltaCaja.addActionListener(accionesMenu);
 		formPrincipal.mntmUsuarios.addActionListener(accionesMenu);
+		formPrincipal.mntmListarFacturas.addActionListener(accionesMenu);
+		formPrincipal.mntmBuscarFactura.addActionListener(accionesMenu);
+		formPrincipal.mntmVentas.addActionListener(accionesMenu);
 	}
-	
-	ActionListener accionesMenu=new ActionListener() {
-		
+
+	ActionListener accionesMenu = new ActionListener() {
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			if(e.getSource()==formPrincipal.mntmAltaClientes)
-			{
+
+			if (e.getSource() == formPrincipal.mntmAltaClientes) {
 				try {
-					altaClienteController=new AltaClienteController(formPrincipal,true);
+					altaClienteController = new AltaClienteController(formPrincipal, true);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			if(e.getSource()==formPrincipal.mntmEditarCliente)
-			{
+			if (e.getSource() == formPrincipal.mntmEditarCliente) {
 				try {
-					altaClienteController=new AltaClienteController(formPrincipal,false);
+					altaClienteController = new AltaClienteController(formPrincipal, false);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			
-			if(e.getSource()==formPrincipal.mntmAltaIva)
-			{
+
+			if (e.getSource() == formPrincipal.mntmAltaIva) {
 				try {
-					altaIva=new AltaIvaController(formPrincipal);
+					altaIva = new AltaIvaController(formPrincipal);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			if(e.getSource()==formPrincipal.mntmListarClientes)
-			{
+			if (e.getSource() == formPrincipal.mntmListarClientes) {
 				try {
-					listarClientesController=new ListarClientesController(formPrincipal);
+					listarClientesController = new ListarClientesController(formPrincipal);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			
-			if(e.getSource()==formPrincipal.mntmNuevoProveedor)
-			{
-				try
-				{
-					altaProveedoresController=new AltaProveedoresController(formPrincipal,false);
-				}catch (Exception e1) {
+
+			if (e.getSource() == formPrincipal.mntmNuevoProveedor) {
+				try {
+					altaProveedoresController = new AltaProveedoresController(formPrincipal, false);
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			if(e.getSource()==formPrincipal.mntmEditarProveedor)
-			{
-				try
-				{
-					altaProveedoresController=new AltaProveedoresController(formPrincipal,true);
-				}catch (Exception e1) {
+			if (e.getSource() == formPrincipal.mntmEditarProveedor) {
+				try {
+					altaProveedoresController = new AltaProveedoresController(formPrincipal, true);
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(formPrincipal, e1.getMessage(), "Error", 0);
 				}
 			}
-			if(e.getSource()==formPrincipal.mntmListarProveedor)
-			{
-				listarProveedoresController=new ListarProveedoresController(formPrincipal);
-				
+			if (e.getSource() == formPrincipal.mntmListarProveedor) {
+				listarProveedoresController = new ListarProveedoresController(formPrincipal);
+
 			}
-			if(e.getSource()==formPrincipal.mntmCategorias)
-			{
-				categoriasController=new CategoriasController(formPrincipal);
+			if (e.getSource() == formPrincipal.mntmCategorias) {
+				categoriasController = new CategoriasController(formPrincipal);
 			}
-			
-			if(e.getSource()==formPrincipal.mntmAltaProducto)
-			{
-				cargarProductoController=new CargarProductoController(formPrincipal,false);
+
+			if (e.getSource() == formPrincipal.mntmAltaProducto) {
+				cargarProductoController = new CargarProductoController(formPrincipal, false);
 			}
-			if(e.getSource()==formPrincipal.mntmEditarProducto)
-			{
-				cargarProductoController=new CargarProductoController(formPrincipal,true);
+			if (e.getSource() == formPrincipal.mntmEditarProducto) {
+				cargarProductoController = new CargarProductoController(formPrincipal, true);
 			}
-			
-			if(e.getSource()==formPrincipal.mntmIngresarStock)
-			{
-				stockController=new StockController(formPrincipal);
+
+			if (e.getSource() == formPrincipal.mntmIngresarStock) {
+				stockController = new StockController(formPrincipal);
 			}
-			if(e.getSource()==formPrincipal.mntmListarProductos)
-			{
-				listarProductosController=new ListarProductosController(formPrincipal);
+			if (e.getSource() == formPrincipal.mntmListarProductos) {
+				listarProductosController = new ListarProductosController(formPrincipal);
 			}
-			
-			if(e.getSource()==formPrincipal.mntmTipoFactura)
-			{
-				tipoFacturaController=new AltaTipoFacturaController();
+
+			if (e.getSource() == formPrincipal.mntmTipoFactura) {
+				tipoFacturaController = new AltaTipoFacturaController();
 			}
-			
-			if(e.getSource()==formPrincipal.mntmAltaCaja)
-			{
-				altaCajaController=new AltaCajasController(formPrincipal);
+
+			if (e.getSource() == formPrincipal.mntmAltaCaja) {
+				altaCajaController = new AltaCajasController(formPrincipal);
 			}
-			
-			if(e.getSource()==formPrincipal.mntmUsuarios)
+
+			if (e.getSource() == formPrincipal.mntmUsuarios) {
+				usuarioNuevoController = new NuevoUsuarioController(formPrincipal);
+			}
+			if(e.getSource()==formPrincipal.mntmListarFacturas)
 			{
-				usuarioNuevoController=new NuevoUsuarioController(formPrincipal);
+				listarFacturasController=new ListarFacturasController(formPrincipal);
 			}
 			
+			if(e.getSource()==formPrincipal.mntmBuscarFactura)
+			{
+				detalleController=new FacturaDetalleController(formPrincipal);
+			}
+			if(e.getSource()==formPrincipal.mntmVentas)
+			{
+				ventasController=new VentasController(formPrincipal);
+			}
+
 		}
 	};
-	
-	
 
 }

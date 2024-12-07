@@ -9,14 +9,21 @@ import java.util.List;
 
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.models.Usuario;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoUsuario implements IDao<Usuario>{
+	
+	private Connection cnn;
+	
+	public DaoUsuario(Connection con) {
+		this.cnn=con;
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public List<Usuario> findAll() throws SQLException, Exception {
 		List<Usuario>lista=new ArrayList<Usuario>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from usuarios u inner join roles r on u.id_role=r.id_role"))
 		{
 			while(st.next())
@@ -44,7 +51,7 @@ public class DaoUsuario implements IDao<Usuario>{
 	@Override
 	public Usuario findById(Long id) throws SQLException, Exception {
 		Usuario p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from usuarios u inner join roles r on u.id_role=r.id_role where u.id_usuario=?"))
 		{
 			ps.setLong(1, id);
@@ -61,7 +68,7 @@ public class DaoUsuario implements IDao<Usuario>{
 	@Override
 	public Usuario findByString(String name) throws SQLException, Exception {
 		Usuario p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from usuarios u inner join roles r on u.id_role=r.id_role where u.username=?"))
 		{
 			ps.setString(1, name);
@@ -87,7 +94,7 @@ public class DaoUsuario implements IDao<Usuario>{
 			
 				sql="update usuarios set id_role=?,username=?,password=?,nombre=?,apellido=?,dni=? where id_usuario=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setLong(1, object.getRole().getId());
@@ -106,7 +113,7 @@ public class DaoUsuario implements IDao<Usuario>{
 
 	@Override
 	public void delete(Usuario object) throws SQLException, Exception {
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from usuarios where id_usuario=?"))
 		{
 			ps.setLong(1, object.getId());			

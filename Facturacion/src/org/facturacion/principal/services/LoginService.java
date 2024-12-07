@@ -1,5 +1,6 @@
 package org.facturacion.principal.services;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -9,16 +10,21 @@ import org.facturacion.principal.dao.DaoUsuario;
 import org.facturacion.principal.excepciones.ExceptionLogin;
 import org.facturacion.principal.models.Role;
 import org.facturacion.principal.models.Usuario;
+import org.facturacion.principal.utils.Conexion;
 
 public class LoginService implements ILoginService{
 	
 	private DaoUsuario daousuario;
 	private DaoRole daoroles;
+	private Connection cnn;
 	
-	public LoginService()
+	public LoginService()throws Exception
 	{
-		daousuario=new DaoUsuario();
-		daoroles=new DaoRole();
+		
+			cnn=Conexion.getConnection();
+		
+		daousuario=new DaoUsuario(cnn);
+		daoroles=new DaoRole(cnn);
 	}
 	
 	@Override

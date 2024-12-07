@@ -11,11 +11,18 @@ import org.facturacion.principal.models.Iva;
 import org.facturacion.principal.utils.Conexion;
 
 public class DaoIva implements IDao<Iva>{
+	
+	private Connection cnn;
+	
+	public DaoIva(Connection con) {
+		// TODO Auto-generated constructor stub
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Iva> findAll() throws SQLException, Exception {
 		List<Iva>lista=new ArrayList<Iva>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from iva"))
 		{
 			while(st.next())
@@ -33,7 +40,7 @@ public class DaoIva implements IDao<Iva>{
 	@Override
 	public Iva findById(Long id) throws SQLException, Exception {
 		Iva p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from iva where p.id_iva=?"))
 		{
 			ps.setLong(1, id);
@@ -52,7 +59,7 @@ public class DaoIva implements IDao<Iva>{
 	@Override
 	public Iva findByString(String name) throws SQLException, Exception {
 		Iva p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from iva where p.tipo_iva=?"))
 		{
 			ps.setString(1, name);
@@ -81,7 +88,7 @@ public class DaoIva implements IDao<Iva>{
 				sql="update iva set tipo_iva=? where id_iva=?";
 		}
 		System.out.println("g");
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());

@@ -9,20 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.facturacion.principal.models.TipoFactura;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoTipoFactura implements IDao<TipoFactura> {
 
 	//private DaoNumeracion numeracion;
-
-	public DaoTipoFactura() {
-		//numeracion = new DaoNumeracion();// TODO Auto-generated constructor stub
+	
+	private Connection cnn;
+	
+	public DaoTipoFactura(Connection con)
+	{
+		this.cnn=con;
 	}
+
+	
 
 	@Override
 	public List<TipoFactura> findAll() throws SQLException, Exception {
 		List<TipoFactura> lista = new ArrayList<TipoFactura>();
-		try (Connection cnn = Conexion.getConnection();
+		try (
 				ResultSet st = cnn.createStatement().executeQuery("select * from tipos_facturas")) {
 			while (st.next()) {
 
@@ -39,7 +44,7 @@ public class DaoTipoFactura implements IDao<TipoFactura> {
 	@Override
 	public TipoFactura findById(Long id) throws SQLException, Exception {
 		TipoFactura p = null;
-		try (Connection cnn = Conexion.getConnection();
+		try (
 				PreparedStatement ps = cnn.prepareStatement("select * from tipos_facturas where p.id_tipo_factura=?")) {
 			ps.setLong(1, id);
 			ResultSet st = ps.executeQuery();
@@ -63,7 +68,7 @@ public class DaoTipoFactura implements IDao<TipoFactura> {
 	public void save(TipoFactura object) throws SQLException, Exception {
 		// TODO Auto-generated method stub
 
-		Connection cnn = Conexion.getConnection();
+		
 		try {
 			cnn.setAutoCommit(false);
 			PreparedStatement ps = cnn.prepareStatement("insert into tipos_facturas (tipo_factura) values(?)",

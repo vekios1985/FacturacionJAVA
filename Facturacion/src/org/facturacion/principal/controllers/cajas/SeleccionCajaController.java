@@ -20,10 +20,16 @@ public class SeleccionCajaController {
 	
 	public SeleccionCajaController(JFrame frame) {
 		caja=null;
-		service=new CajasService();
-		cajas=new FormSeleccionCaja(frame);
+		try {
+			service=new CajasService();
+			cajas=new FormSeleccionCaja(frame);
 		CargarLista();
 		cajas.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
+		
 	}
 
 	@SuppressWarnings({ "unchecked" })

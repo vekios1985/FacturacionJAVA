@@ -1,5 +1,6 @@
 package org.facturacion.principal.services.clientes;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -9,16 +10,18 @@ import org.facturacion.principal.dao.DaoCliente;
 import org.facturacion.principal.dao.DaoIva;
 import org.facturacion.principal.models.Cliente;
 import org.facturacion.principal.models.Iva;
+import org.facturacion.principal.utils.Conexion;
 
 public class ClienteService implements IClientesService{
 
 	private DaoCliente clientes;
 	private DaoIva iva;
-	
-	public ClienteService()
+	private Connection cnn;
+	public ClienteService()throws Exception
 	{
-		clientes=new DaoCliente();
-		iva=new DaoIva();
+		cnn=Conexion.getConnection();
+		clientes=new DaoCliente(cnn);
+		iva=new DaoIva(cnn);
 	}
 	
 	@Override

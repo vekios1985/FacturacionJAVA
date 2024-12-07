@@ -21,13 +21,18 @@ public class CategoriasController {
 	
 	public CategoriasController(FormPrincipal principal)
 	{
-		formCategoria=new FormAltaCategorias(principal, true);
-		formCategoria.btnGuardar.addActionListener(ac);
-		service=new ProductoService();
-		ListarCategorias();
-		
-		
-		formCategoria.setVisible(true);
+		try {
+			formCategoria=new FormAltaCategorias(principal, true);
+			formCategoria.btnGuardar.addActionListener(ac);
+			service=new ProductoService();
+			ListarCategorias();
+			
+			
+			formCategoria.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 	}
 	
 	

@@ -10,22 +10,24 @@ import java.util.List;
 import org.facturacion.principal.models.ItemProducto;
 import org.facturacion.principal.models.Producto;
 import org.facturacion.principal.models.Proveedor;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoItemProducto implements IDao<ItemProducto>{
 
 	private DaoProducto daoProducto;
 	private DaoProveedor daoProveedor;
+	private Connection cnn;
 	
-	public DaoItemProducto()
+	public DaoItemProducto(Connection con)
 	{
-		daoProducto=new DaoProducto();
-		daoProveedor=new DaoProveedor();
+		this.cnn=con;
+		daoProducto=new DaoProducto(con);
+		daoProveedor=new DaoProveedor(con);
 	}
 	@Override
 	public List<ItemProducto> findAll() throws SQLException, Exception {
 		List<ItemProducto>lista=new ArrayList<ItemProducto>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from items_productos"))
 		{
 			while(st.next())
@@ -51,7 +53,7 @@ public class DaoItemProducto implements IDao<ItemProducto>{
 	@Override
 	public ItemProducto findById(Long id) throws SQLException, Exception {
 		ItemProducto p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from items_productos where p.id_item=?"))
 		{
 			ps.setLong(1, id);
@@ -83,7 +85,7 @@ public class DaoItemProducto implements IDao<ItemProducto>{
 			
 				sql="update items_productos set id_producto=?,id_proveedor=?,stock=?,precio=? where id_item=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setLong(1, object.getProducto().getId());
@@ -100,7 +102,7 @@ public class DaoItemProducto implements IDao<ItemProducto>{
 
 	@Override
 	public void delete(ItemProducto object) throws SQLException, Exception {
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from items_productos where id_item=?"))
 		{
 			ps.setLong(1, object.getId());			

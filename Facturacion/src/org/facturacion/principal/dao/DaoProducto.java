@@ -9,14 +9,21 @@ import java.util.List;
 
 import org.facturacion.principal.models.Categoria;
 import org.facturacion.principal.models.Producto;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoProducto implements IDao<Producto>{
+	
+	private Connection cnn;
+	
+	public DaoProducto(Connection con) {
+		// TODO Auto-generated constructor stub
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Producto> findAll() throws SQLException, Exception {
 		List<Producto>lista=new ArrayList<Producto>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categorias"))
 		{
 			while(st.next())
@@ -40,7 +47,7 @@ public class DaoProducto implements IDao<Producto>{
 	@Override
 	public Producto findById(Long id) throws SQLException, Exception{
 		Producto p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categorias where p.id_producto=?"))
 		{
 			ps.setLong(1, id);
@@ -57,7 +64,7 @@ public class DaoProducto implements IDao<Producto>{
 	
 	public Producto findByCodigo(Long codigo) throws SQLException, Exception{
 		Producto p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categoria where p.codigo=?"))
 		{
 			ps.setLong(1, codigo);
@@ -74,7 +81,7 @@ public class DaoProducto implements IDao<Producto>{
 	@Override
 	public Producto findByString(String name) throws SQLException, Exception{
 		Producto p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from productos p inner join categorias_productos c on p.id_categoria=c.id_categoria where p.nombre=?"))
 		{
 			ps.setString(1, name);
@@ -102,7 +109,7 @@ public class DaoProducto implements IDao<Producto>{
 			
 				sql="update productos set nombre=?,id_categoria=?,codigo=? where id_producto=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 			
@@ -120,7 +127,7 @@ public class DaoProducto implements IDao<Producto>{
 	@Override
 	public void delete(Producto object) throws SQLException, Exception{
 		// TODO Auto-generated method stub
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from productos where id_producto=?"))
 		{
 			ps.setLong(1, object.getId());			

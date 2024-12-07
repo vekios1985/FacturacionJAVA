@@ -24,33 +24,31 @@ public class AltaClienteController {
 	private boolean nuevo_cliente;
 	Cliente cliente=null;
 	
-	public AltaClienteController(FormPrincipal principal,boolean nuevo_cliente) throws Exception
+	public AltaClienteController(FormPrincipal principal,boolean nuevo_cliente) 
 	{
-		this.principal=principal;
+		
+		try
+		{this.principal=principal;
 		this.nuevo_cliente=nuevo_cliente;
 		altaCliente=new FormAltaCliente(principal, true);
 		setInicio();
 		clienteServive=new ClienteService();
 		limpiarCampos();
-		try
-		{
-			cargarCombo();
-		}catch(Exception ex)
-		{
-			throw ex;
-		}
+		cargarCombo();
 		altaCliente.btnGuardar.addActionListener(accion);
 		altaCliente.btnBuscar.addActionListener(accion);
-		if(nuevo_cliente)
-		{
+		if (nuevo_cliente) {
 			altaCliente.lblTexto.setText("Alta Cliente");
-			
-		}
-		else
-		{
+
+		} else {
 			altaCliente.lblTexto.setText("Editar Cliente");
 		}
 		altaCliente.setVisible(true);
+		}catch(Exception ex)
+		{
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 0);
+		}
+		
 	}
 	
 	void setInicio()

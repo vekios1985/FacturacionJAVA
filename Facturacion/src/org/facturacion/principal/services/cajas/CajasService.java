@@ -5,13 +5,18 @@ import java.util.List;
 
 import org.facturacion.principal.dao.DaoCajas;
 import org.facturacion.principal.models.Caja;
+import org.facturacion.principal.utils.Conexion;
 
 public class CajasService implements ICajasService{
 	
 	private DaoCajas cajas;
 	
-	public CajasService() {
-		cajas=new DaoCajas();// TODO Auto-generated constructor stub
+	
+	public CajasService() throws Exception
+	{
+		
+			cajas=new DaoCajas(Conexion.getConnection());
+		
 	}
 
 	@Override

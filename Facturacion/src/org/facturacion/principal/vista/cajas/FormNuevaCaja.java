@@ -1,6 +1,6 @@
 package org.facturacion.principal.vista.cajas;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -19,9 +19,11 @@ public class FormNuevaCaja extends JDialog {
 	public JTextField textFieldNombreCaja;
 	public JLabel lblNombreCaja;
 	public JButton btnAgregar;
+	@SuppressWarnings("rawtypes")
 	public JList list;
 
 	
+	@SuppressWarnings("rawtypes")
 	public FormNuevaCaja(JFrame frame,boolean modal) {
 		super(frame,modal);
 		

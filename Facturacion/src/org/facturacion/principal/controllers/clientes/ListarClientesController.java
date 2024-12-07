@@ -22,7 +22,8 @@ public class ListarClientesController {
 	"IVA" };
 
 	public ListarClientesController(FormPrincipal principal) {
-		this.principal = principal;
+		
+		try {this.principal = principal;
 		frmListado = new FormListadoClientes(principal, true);
 		cargarColumnas();
 		frmListado.btnBuscar.addActionListener(accion);
@@ -31,8 +32,13 @@ public class ListarClientesController {
 		frmListado.rdbtnTodos.addActionListener(accion);
 		frmListado.rdbtnApellido.addActionListener(accion);
 		frmListado.rdbtnDni.addActionListener(accion);
-		service = new ClienteService();
-		this.frmListado.setVisible(true);
+			service = new ClienteService();
+			this.frmListado.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
+		
 	}
 
 	void cargarColumnas() {

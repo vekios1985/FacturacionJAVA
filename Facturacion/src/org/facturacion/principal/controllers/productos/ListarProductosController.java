@@ -30,21 +30,26 @@ public class ListarProductosController {
 	private DefaultTableModel tableModel;
 
 	public ListarProductosController(FormPrincipal principal) {
-		formProductos = new FormListarProductos(principal, true);
-		CargarTable();
-		formProductos.rdbtnCategorias.addItemListener(it);
-		formProductos.rdbtnNombre.addItemListener(it);
-		formProductos.rdbtnProveedor.addItemListener(it);
-		formProductos.rdbtnTodos.addItemListener(it);
-		formProductos.rdbtnTodos.setSelected(true);
-		serviceProducto = new ProductoService();
-		serviceProveedor = new ProveedorService();
+		try {
+			formProductos = new FormListarProductos(principal, true);
+			CargarTable();
+			formProductos.rdbtnCategorias.addItemListener(it);
+			formProductos.rdbtnNombre.addItemListener(it);
+			formProductos.rdbtnProveedor.addItemListener(it);
+			formProductos.rdbtnTodos.addItemListener(it);
+			formProductos.rdbtnTodos.setSelected(true);
+			serviceProducto = new ProductoService();
+			serviceProveedor = new ProveedorService();
 
-		formProductos.btnListar.addActionListener(ac);
-		formProductos.btnExcel.addActionListener(ac);
-		formProductos.btnPdf.addActionListener(ac);
+			formProductos.btnListar.addActionListener(ac);
+			formProductos.btnExcel.addActionListener(ac);
+			formProductos.btnPdf.addActionListener(ac);
 
-		formProductos.setVisible(true);
+			formProductos.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 	}
 
 	void CargarTable() {

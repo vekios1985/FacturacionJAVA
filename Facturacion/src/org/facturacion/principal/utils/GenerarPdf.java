@@ -122,30 +122,7 @@ public class GenerarPdf {
 	        }
 	        
 	    }
-	    
-	    /*private static List<String> splitTextToFitWidth(String text, float width, PDType1Font font, int fontSize) {
-	        List<String> lines = new ArrayList<>();
-	        StringBuilder line = new StringBuilder();
-	        for (String word : text.split("[ @]+")) {
-	            float lineWidth=0;
-				try {
-					lineWidth = font.getStringWidth(line + word + " ") / 1000 * fontSize;
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            if (lineWidth > width) {
-	                lines.add(line.toString().trim());
-	                line = new StringBuilder(word + " ");
-	            } else {
-	                line.append(word).append(" ");
-	            }
-	        }
-	        if (!line.isEmpty()) {
-	            lines.add(line.toString().trim());
-	        }
-	        return lines;
-	    }*/
+
 	    
 	    private static List<String> splitTextToFitWidth(String text, float width, PDType1Font font, int fontSize) {
 	        List<String> lines = new ArrayList<>();

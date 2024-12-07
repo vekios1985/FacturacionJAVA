@@ -11,22 +11,23 @@ import java.util.List;
 import org.facturacion.principal.models.Cliente;
 import org.facturacion.principal.models.Factura;
 import org.facturacion.principal.models.TipoFactura;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoFactura implements IDao<Factura>{
 	
 	private DaoCliente daoCliente;
+	private Connection cnn;
 	
-	
-	public DaoFactura ()
+	public DaoFactura (Connection con)
 	{
-		daoCliente=new DaoCliente();
+		this.cnn=con;
+		daoCliente=new DaoCliente(con);
 	}
 
 	@Override
 	public List<Factura> findAll() throws SQLException, Exception {
 		List<Factura>lista=new ArrayList<Factura>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from facturas f inner join tipos_facturas t on f.id_tipo_factura=t.id_tipo_factura"))
 		{
 			while(st.next())
@@ -49,7 +50,7 @@ public class DaoFactura implements IDao<Factura>{
 			tipo.setTipo(st.getString("t.tipo_factura"));
 			factura.setTipoFactura(tipo);
 			factura.setNumero(st.getString("f.numero"));
-			factura.setDescuento(null);
+			factura.setDescuento(st.getDouble("f.descuento"));
 			factura.setFecha(st.getDate("f.fecha").toLocalDate());
 			factura.setCliente(cliente);
 			factura.setId(st.getLong("f.id_factura"));
@@ -62,7 +63,7 @@ public class DaoFactura implements IDao<Factura>{
 	@Override
 	public Factura findById(Long id) throws SQLException, Exception {
 		Factura p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from facturas f inner join tipos_facturas t on f.id_tipo_factura=t.id_tipo_factura where f.id_factura=?"))
 		{
 			ps.setLong(1, id);
@@ -79,7 +80,7 @@ public class DaoFactura implements IDao<Factura>{
 	@Override
 	public Factura findByString(String name) throws SQLException, Exception {
 		Factura p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from facturas f inner join tipos_facturas t on f.id_tipo_factura=t.id_tipo_factura where f.numero=?"))
 		{
 			ps.setString(1, name);
@@ -105,7 +106,7 @@ public class DaoFactura implements IDao<Factura>{
 			
 				sql="update facturas set numero=?,fecha=?,id_cliente=?,descuento=?,id_tipo_factura=?,observacion=? where id_factura=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNumero());
@@ -123,7 +124,7 @@ public class DaoFactura implements IDao<Factura>{
 
 	@Override
 	public void delete(Factura object) throws SQLException, Exception {
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from facturas where id_factura=?"))
 		{
 			ps.setLong(1, object.getId());			

@@ -29,6 +29,7 @@ public class FormUsuarios extends JDialog {
 	public JLabel lbluserName;
 	public JLabel lblPassword;
 	public JLabel lblRole;
+	@SuppressWarnings("rawtypes")
 	public JComboBox comboBoxRole;
 	public JButton btnGuardar;
 	public JButton btnEditar;
@@ -36,6 +37,7 @@ public class FormUsuarios extends JDialog {
 	
 	
 	
+	@SuppressWarnings("rawtypes")
 	public FormUsuarios(JFrame frame,boolean modal) {
 		super(frame,modal);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

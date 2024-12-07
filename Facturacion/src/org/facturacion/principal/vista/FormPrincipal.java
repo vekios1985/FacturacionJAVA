@@ -39,6 +39,9 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmTipoFactura;
 	public JMenuItem mntmAltaCaja;
 	public JMenuItem mntmUsuarios;
+	public JMenuItem mntmListarFacturas;
+	public JMenuItem mntmBuscarFactura;
+	public JMenuItem mntmVentas;
 	/**
 	 * Launch the application.
 	 */
@@ -123,6 +126,15 @@ public class FormPrincipal extends JFrame {
 		
 		mnNewMenuVentas = new JMenu("Ventas");
 		menuBar.add(mnNewMenuVentas);
+		
+		mntmListarFacturas = new JMenuItem("Listar Facturas");
+		mnNewMenuVentas.add(mntmListarFacturas);
+		
+		mntmBuscarFactura = new JMenuItem("Buscar Factura");
+		mnNewMenuVentas.add(mntmBuscarFactura);
+		
+		mntmVentas = new JMenuItem("Ventas");
+		mnNewMenuVentas.add(mntmVentas);
 		
 		mnNewMenuCajas = new JMenu("Cajas");
 		menuBar.add(mnNewMenuCajas);

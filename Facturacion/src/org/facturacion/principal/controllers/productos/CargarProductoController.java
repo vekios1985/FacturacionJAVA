@@ -23,13 +23,18 @@ public class CargarProductoController {
 	private Producto producto=null;
 	
 	public CargarProductoController(FormPrincipal principal,boolean modificar) {
-		formProducto=new FormCargarProducto(principal, true);
-		this.modificar=modificar;
-		service=new ProductoService();
-		CargarComboBox();
-		formProducto.btnAgregar.addActionListener(ac);
-		formProducto.btnBuscar.addActionListener(ac);
-		formProducto.setVisible(true);
+		try {
+			formProducto=new FormCargarProducto(principal, true);
+			this.modificar=modificar;
+			service=new ProductoService();
+			CargarComboBox();
+			formProducto.btnAgregar.addActionListener(ac);
+			formProducto.btnBuscar.addActionListener(ac);
+			formProducto.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

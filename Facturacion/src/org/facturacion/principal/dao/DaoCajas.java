@@ -8,14 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.facturacion.principal.models.Caja;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoCajas implements IDao<Caja>{
+	
+	private Connection cnn;
+	
+	public DaoCajas(Connection con) {
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Caja> findAll() throws SQLException, Exception {
 		List<Caja>lista=new ArrayList<Caja>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from cajas"))
 		{
 			while(st.next())
@@ -54,7 +60,7 @@ public class DaoCajas implements IDao<Caja>{
 			
 				sql="update cajas set nombre=? where id_caja=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());

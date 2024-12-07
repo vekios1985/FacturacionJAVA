@@ -19,16 +19,23 @@ public class AltaCajasController {
 	ICajasService service;
 	DefaultListModel<Caja> modelo;
 	
+	@SuppressWarnings("unchecked")
 	public AltaCajasController(FormPrincipal principal) {
 		
-		nuevaCaja=new FormNuevaCaja(principal, true);
-		service=new CajasService();
-		modelo=new DefaultListModel<Caja>();
-		nuevaCaja.list.setModel(modelo);
-		listarCajas();
-		nuevaCaja.btnAgregar.addActionListener(ac);
 		
-		nuevaCaja.setVisible(true);
+		try {nuevaCaja=new FormNuevaCaja(principal, true);
+			service = new CajasService();
+			modelo = new DefaultListModel<Caja>();
+			nuevaCaja.list.setModel(modelo);
+			listarCajas();
+			nuevaCaja.btnAgregar.addActionListener(ac);
+
+			nuevaCaja.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+		}
+		
 	}
 	
 	void listarCajas()

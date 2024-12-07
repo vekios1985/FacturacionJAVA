@@ -8,14 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.facturacion.principal.models.Proveedor;
-import org.facturacion.principal.utils.Conexion;
+
 
 public class DaoProveedor implements IDao<Proveedor>{
+	
+	private Connection cnn;
+	
+	public DaoProveedor(Connection con) {
+		// TODO Auto-generated constructor stub
+		this.cnn=con;
+	}
 
 	@Override
 	public List<Proveedor> findAll() throws SQLException, Exception {
 		List<Proveedor>lista=new ArrayList<Proveedor>();
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				ResultSet st=cnn.createStatement().executeQuery("select * from proveedores"))
 		{
 			while(st.next())
@@ -36,7 +43,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 	@Override
 	public Proveedor findById(Long id) throws SQLException, Exception {
 		Proveedor p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from proveedores where id_proveedor=?"))
 		{
 			ps.setLong(1, id);
@@ -53,7 +60,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 	@Override
 	public Proveedor findByString(String name) throws SQLException, Exception {
 		Proveedor p=null;
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("select * from proveedores where p.nombre=?"))
 		{
 			ps.setString(1, name);
@@ -79,7 +86,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 			
 				sql="update proveedores set nombre=?,telefono=?,email=?,direccion=?,cuit=? where id_proveedor=?";
 		}
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement(sql))
 					{
 						ps.setString(1, object.getNombre());
@@ -96,7 +103,7 @@ public class DaoProveedor implements IDao<Proveedor>{
 
 	@Override
 	public void delete(Proveedor object) throws SQLException, Exception {
-		try(Connection cnn=Conexion.getConnection();
+		try(
 				PreparedStatement ps=cnn.prepareStatement("delete from proveedores where id_proveedor=?"))
 		{
 			ps.setLong(1, object.getId());			
