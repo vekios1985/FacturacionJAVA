@@ -8,20 +8,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.BorderLayout;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 public class FormPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public JMenu mnNewMenuInicio;
-	public JMenuItem mntmNewMenuItem;
+	public JMenuItem mntmSalir;
 	public JMenu mnNewMenuClientes;
 	public JMenu mnNewMenuProveedores;
 	public JMenu mnNewMenuProductos;
 	public JMenu mnNewMenuVentas;
-	public JMenu mnNewMenuCajas;
 	public JMenuItem mntmAltaClientes;
 	public JMenu mnNewMenuAdministracion;
 	public JMenuItem mntmAltaIva;
@@ -42,6 +39,8 @@ public class FormPrincipal extends JFrame {
 	public JMenuItem mntmListarFacturas;
 	public JMenuItem mntmBuscarFactura;
 	public JMenuItem mntmVentas;
+	public JMenuItem mntmMiPerfil;
+	public JMenuItem mntmCambiarUsuario;
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +50,7 @@ public class FormPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public FormPrincipal() {
-		try {
+		/*try {
 			
 			
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
@@ -71,7 +70,7 @@ public class FormPrincipal extends JFrame {
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBounds(100, 100, 1300, 680);
@@ -82,8 +81,14 @@ public class FormPrincipal extends JFrame {
 		mnNewMenuInicio = new JMenu("Inicio");
 		menuBar.add(mnNewMenuInicio);
 		
-		mntmNewMenuItem = new JMenuItem("New menu item");
-		mnNewMenuInicio.add(mntmNewMenuItem);
+		mntmMiPerfil = new JMenuItem("Mi Perfil");
+		mnNewMenuInicio.add(mntmMiPerfil);
+		
+		mntmCambiarUsuario = new JMenuItem("Cambiar Usuario");
+		mnNewMenuInicio.add(mntmCambiarUsuario);
+		
+		mntmSalir = new JMenuItem("Salir");
+		mnNewMenuInicio.add(mntmSalir);
 		
 		mnNewMenuClientes = new JMenu("Clientes");
 		menuBar.add(mnNewMenuClientes);
@@ -135,9 +140,6 @@ public class FormPrincipal extends JFrame {
 		
 		mntmVentas = new JMenuItem("Ventas");
 		mnNewMenuVentas.add(mntmVentas);
-		
-		mnNewMenuCajas = new JMenu("Cajas");
-		menuBar.add(mnNewMenuCajas);
 		
 		mnNewMenuAdministracion = new JMenu("Administracion");
 		menuBar.add(mnNewMenuAdministracion);

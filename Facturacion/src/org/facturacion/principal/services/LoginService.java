@@ -81,6 +81,11 @@ public class LoginService implements ILoginService{
 		}
 		
 	}
+
+	@Override
+	public Usuario findUsuarioByDni(Integer dni) throws Exception {
+		return findAllUser().stream().filter(u->u.getDni().equals(dni)).findFirst().orElse(null);
+	}
 	
 	
 

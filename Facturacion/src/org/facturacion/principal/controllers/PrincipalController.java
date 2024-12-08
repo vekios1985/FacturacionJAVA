@@ -2,6 +2,7 @@ package org.facturacion.principal.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -48,6 +49,7 @@ public class PrincipalController {
 	private ListarFacturasController listarFacturasController;
 	private FacturaDetalleController detalleController;
 	private VentasController ventasController;
+	private MiPerfilController miPerfil;
 	public Usuario usuario = null;
 
 	private ILoginService service;
@@ -57,16 +59,24 @@ public class PrincipalController {
 		try {
 			formPrincipal = principal;
 			formPrincipal.setVisible(true);
-			service = new LoginService();
+			iniciarLogin();
 			deshabilitar();
 
 			iniciarController();
+			setActionListener();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
 		}
 		// usuario=service.
 
+	}
+	
+	void iniciarLogin()throws Exception
+	{
+		
+			service=new LoginService();
+		
 	}
 
 	void iniciarController() {
@@ -83,7 +93,7 @@ public class PrincipalController {
 		}
 
 		facturacion = new FacturacionController(formPrincipal, usuario);
-		setActionListener();
+		
 
 	}
 
@@ -91,12 +101,32 @@ public class PrincipalController {
 		// Falta agregar la habilitacion de roles
 
 		try {
-			// Role role = service.obtenerRole(usuario);
-			this.formPrincipal.mnNewMenuClientes.setEnabled(true);
-			this.formPrincipal.mnNewMenuProveedores.setEnabled(true);
-			this.formPrincipal.mnNewMenuProductos.setEnabled(true);
-			this.formPrincipal.mnNewMenuVentas.setEnabled(true);
-			this.formPrincipal.mnNewMenuCajas.setEnabled(true);
+			 Role role = service.obtenerRole(usuario);
+			 this.formPrincipal.mnNewMenuClientes.setEnabled(true);
+			 this.formPrincipal.mnNewMenuInicio.setEnabled(true);
+			 if(role.getNombre().equals("ROLE_ADMIN"))
+			 {
+				
+				 this.formPrincipal.mnNewMenuProveedores.setEnabled(true);
+				 this.formPrincipal.mnNewMenuProductos.setEnabled(true);
+				 this.formPrincipal.mnNewMenuVentas.setEnabled(true);
+				 this.formPrincipal.mnNewMenuAdministracion.setEnabled(true);
+			 }
+			 else if(role.getNombre().equals("ROLE_USER"))
+			 {
+				 this.formPrincipal.mnNewMenuProveedores.setEnabled(false);
+				 this.formPrincipal.mnNewMenuProductos.setEnabled(true);
+				 this.formPrincipal.mnNewMenuVentas.setEnabled(false);
+				 this.formPrincipal.mnNewMenuAdministracion.setEnabled(false);
+			 }
+			 else if(role.getNombre().equals("ROLE_SUPERVISOR"))
+			 {
+				 this.formPrincipal.mnNewMenuProveedores.setEnabled(true);
+				 this.formPrincipal.mnNewMenuProductos.setEnabled(true);
+				 this.formPrincipal.mnNewMenuVentas.setEnabled(true);
+				 this.formPrincipal.mnNewMenuAdministracion.setEnabled(false);
+			 }
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(formPrincipal, e.getMessage(), "Error", 0);
@@ -109,7 +139,6 @@ public class PrincipalController {
 		this.formPrincipal.mnNewMenuProveedores.setEnabled(false);
 		this.formPrincipal.mnNewMenuProductos.setEnabled(false);
 		this.formPrincipal.mnNewMenuVentas.setEnabled(false);
-		this.formPrincipal.mnNewMenuCajas.setEnabled(false);
 	}
 
 	void setActionListener() {
@@ -131,6 +160,9 @@ public class PrincipalController {
 		formPrincipal.mntmListarFacturas.addActionListener(accionesMenu);
 		formPrincipal.mntmBuscarFactura.addActionListener(accionesMenu);
 		formPrincipal.mntmVentas.addActionListener(accionesMenu);
+		formPrincipal.mntmSalir.addActionListener(accionesMenu);
+		formPrincipal.mntmMiPerfil.addActionListener(accionesMenu);
+		formPrincipal.mntmCambiarUsuario.addActionListener(accionesMenu);
 	}
 
 	ActionListener accionesMenu = new ActionListener() {
@@ -233,6 +265,43 @@ public class PrincipalController {
 			if(e.getSource()==formPrincipal.mntmVentas)
 			{
 				ventasController=new VentasController(formPrincipal);
+			}
+			if(e.getSource()==formPrincipal.mntmSalir)
+			{
+				System.exit(0);
+			}
+			if(e.getSource()==formPrincipal.mntmCambiarUsuario)
+			{
+				
+				    // Cerrar el formulario principal actual
+				    formPrincipal.dispose();
+				    
+				    // Relanzar el login
+				    try {
+				        // Crear una nueva instancia del LoginController
+				        //LoginController nuevoLoginController = new LoginController(null, true);
+				        
+				        // Obtener el usuario autenticado
+				        Usuario nuevoUsuario = controllerLogin.usuario;
+
+				        if (nuevoUsuario != null) {
+				            // Si el usuario es válido, iniciar un nuevo formulario principal
+				            FormPrincipal nuevoFormPrincipal = new FormPrincipal();
+				            new PrincipalController(nuevoFormPrincipal); // Pasar el nuevo formulario al controlador
+				        } else {
+				            // Si no se autentica un usuario, cerrar la aplicación
+				            JOptionPane.showMessageDialog(null, "Usuario no autenticado. Cerrando la aplicación.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				            System.exit(0);
+				        }
+				    } catch (Exception ex) {
+				        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				    }
+				
+
+			}
+			if(e.getSource()==formPrincipal.mntmMiPerfil)
+			{
+				miPerfil=new MiPerfilController(formPrincipal,usuario);
 			}
 
 		}

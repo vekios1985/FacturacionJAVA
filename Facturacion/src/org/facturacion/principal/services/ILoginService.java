@@ -10,6 +10,7 @@ import org.facturacion.principal.models.Usuario;
 public interface ILoginService {
 	
 	public Usuario validarUsuario(String username,String password)throws SQLException, Exception,ExceptionLogin;
+	public Usuario findUsuarioByDni(Integer dni)throws Exception;
 	public List<Usuario> findAllUser()throws Exception;
 	public void saveUser(Usuario user)throws Exception;
 	public List<Role> listarRoles()throws SQLException, Exception;

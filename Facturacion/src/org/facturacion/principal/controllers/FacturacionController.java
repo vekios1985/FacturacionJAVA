@@ -72,6 +72,8 @@ public class FacturacionController {
 		}
 
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	void CargarComboFactura() {
@@ -112,11 +114,11 @@ public class FacturacionController {
 	};
 
 	public void setPanelEnabled(JPanel panel, boolean enabled) {
-		panel.setEnabled(enabled); // Esto afecta al propio panel (por ejemplo, en términos visuales).
+		panel.setEnabled(enabled); // Esto afecta al propio panel (por ejemplo, en tï¿½rminos visuales).
 		for (Component component : panel.getComponents()) {
 			component.setEnabled(enabled); // Desactiva todos los hijos del panel.
 			if (component instanceof JPanel) {
-				// Si hay un JPanel anidado, desactiva también sus hijos.
+				// Si hay un JPanel anidado, desactiva tambiï¿½n sus hijos.
 				setPanelEnabled((JPanel) component, enabled);
 			}
 		}
@@ -192,7 +194,7 @@ public class FacturacionController {
 				label.setFont(new Font("Tahoma", Font.BOLD, 12)); // Cambiar fuente
 				label.setForeground(new Color(255, 255, 255)); // Color de texto
 				label.setBackground(new Color(0, 0, 255)); // Fondo azul
-				label.setHorizontalAlignment(SwingConstants.CENTER); // Alineación centrada
+				label.setHorizontalAlignment(SwingConstants.CENTER); // Alineaciï¿½n centrada
 				return label;
 			}
 		});

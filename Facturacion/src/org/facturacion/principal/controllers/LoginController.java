@@ -64,27 +64,31 @@ public class LoginController {
 	public Usuario validarUsuario() {
 
 		String username = "vekios";
-		// char password[];
+		 char password[];
 
 		try {
-			// username=login.textFieldUsuario.getText();
-			// username.trim();
+			 username=login.textFieldUsuario.getText();
+			 username.trim();
 			if (username.length() < 3 || username.isEmpty() || username.isBlank()) {
 				JOptionPane.showMessageDialog(login, "El usuario no puede ser menor a 3 caracteres", "Error", 0);
 			} else {
-				// password=login.passwordFieldPassword.getPassword();
-
-				/*
-				 * if(password.length<3) { JOptionPane.showMessageDialog(login,
-				 * "El campo de contraseña no puede estar vacio o menor a 3 caracteres",
-				 * "Error", 0); }else { //String newPassword=new String(password); String
-				 * newPassword="12345"; usuario = service.validarUsuario(username, newPassword);
-				 * 
-				 * 
-				 * }
-				 */
-				String newPassword = "12345";
-				usuario = service.validarUsuario(username, newPassword);
+				
+				
+				 password=login.passwordFieldPassword.getPassword();				
+				  if(password.length<3) 
+				  { 
+					  JOptionPane.showMessageDialog(login, "El campo de contraseï¿½a no puede estar vacio o menor a 3 caracteres",
+				  "Error", 0); }
+				  
+				  else { 
+					  
+					  String newPassword=new String(password); 
+					  //String newPassword="12345"; usuario = service.validarUsuario(username, newPassword);		  
+					  usuario = service.validarUsuario(username, newPassword);
+				 
+				  }
+				//String newPassword = "12345";
+				
 			}
 
 		} catch (Exception e) {
