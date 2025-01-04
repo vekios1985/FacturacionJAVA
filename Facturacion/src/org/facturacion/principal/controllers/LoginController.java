@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import org.facturacion.principal.models.Usuario;
 import org.facturacion.principal.services.ILoginService;
 import org.facturacion.principal.services.LoginService;
+import org.facturacion.principal.utils.LanguageManager;
 import org.facturacion.principal.vista.FormLogin;
 import org.facturacion.principal.vista.FormPrincipal;
 
@@ -19,7 +20,7 @@ public class LoginController {
 	public LoginController(FormPrincipal formPrincipal, boolean modal) {
 
 		try {
-			
+			//LanguageManager.addLanguageChangeListener(this::updateTexts);
 			service = new LoginService();
 			usuario = null;
 			login = new FormLogin(formPrincipal, modal);
